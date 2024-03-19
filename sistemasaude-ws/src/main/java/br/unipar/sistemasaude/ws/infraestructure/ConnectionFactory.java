@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package br.unipar.sistemasaude.ws.infraestructure;
 
 import java.sql.Connection;
@@ -34,4 +35,18 @@ public class ConnectionFactory {
         return null;
         
     }
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package br.unipar.sistemasaude.ws.infraestructure;
+
+/**
+ *
+ * @author lucia
+ */
+public class ConnectionFactory {
+    
+>>>>>>> 19c9438b0758353d6dba0b989aa2a5570dee98da
 }
