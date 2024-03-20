@@ -36,6 +36,10 @@ public class PacienteRepository {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        
+        String enderecocompleto = paciente.getLogradouro() + " "+ paciente.getNumero() 
+                + " "+ paciente.getComplemento() + " "+ paciente.getBairro();
+        
 
         try {
             conn = new ConnectionFactory().getConnection();
@@ -45,7 +49,7 @@ public class PacienteRepository {
             ps.setString(2, paciente.getEmail());
             ps.setString(3, paciente.getTelefone());
             ps.setString(4, paciente.getCpf());
-            ps.setInt(5, 1);
+            ps.setString(6, enderecocompleto);
             ps.executeUpdate();
 
             rs = ps.getGeneratedKeys();

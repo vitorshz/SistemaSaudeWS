@@ -13,12 +13,15 @@ import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.interfaces.MedicoInterface;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.service.medicoService;
+import jakarta.jws.WebService;
 import jakarta.validation.ValidationException;
 
 /**
  *
  * @author lucia
  */
+
+@WebService(endpointInterface="br.unipar.sistemasaude.ws.interfaces.MedicoInterface")
 public class MedicoWebServiceImp implements MedicoInterface{
 
     @Override

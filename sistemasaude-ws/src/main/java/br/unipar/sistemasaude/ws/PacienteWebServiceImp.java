@@ -3,10 +3,13 @@ package br.unipar.sistemasaude.ws;
 import br.unipar.sistemasaude.ws.interfaces.PacienteInterface;
 import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.service.PacienteService;
+import jakarta.jws.WebService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+@WebService(endpointInterface = "br.unipar.sistemasaude.ws.interfaces.PacienteInterface")
 public class PacienteWebServiceImp implements PacienteInterface{
 
     @Override
