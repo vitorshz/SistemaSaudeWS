@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.unipar.sistemasaude.ws.repositories;
+package br.unipar.sistemasaude.ws.repository;
 
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Paciente;

@@ -2,7 +2,8 @@ package br.unipar.sistemasaude.ws;
 
 import br.unipar.sistemasaude.ws.interfaces.PacienteInterface;
 import br.unipar.sistemasaude.ws.models.Paciente;
-import br.unipar.sistemasaude.ws.services.PacienteService;
+import br.unipar.sistemasaude.ws.service.PacienteService;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class PacienteWebServiceImp implements PacienteInterface{
     }
 
     @Override
-    public Paciente inserir(Paciente paciente) {
+    public Paciente inserir(Paciente paciente) throws SQLException {
         PacienteService pacienteService = new PacienteService();
         return pacienteService.insert(paciente);
     }

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.MedicoRequest;
+import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
+import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.models.Medico;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
@@ -28,10 +30,10 @@ public interface MedicoInterface {
     Medico findById(@WebParam int id);
     
     @WebMethod
-    MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException,ValidationException;
+    MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException,ValidationException, EspecialidadeException;
     
     @WebMethod
-    Medico atualizar(Medico medico);
+    MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws SQLException;
     
     @WebMethod
     void deletar(int id);
