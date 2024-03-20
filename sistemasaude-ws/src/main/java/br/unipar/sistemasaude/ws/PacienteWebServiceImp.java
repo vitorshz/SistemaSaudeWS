@@ -33,7 +33,7 @@ public class PacienteWebServiceImp implements PacienteInterface{
     }
 
     @Override
-    public Paciente atualizar(Paciente paciente) throws SQLException {
+    public Paciente atualizar(Paciente paciente) throws Exception {
         PacienteService pacienteService = new PacienteService();
         return pacienteService.atualizar(paciente);
     }

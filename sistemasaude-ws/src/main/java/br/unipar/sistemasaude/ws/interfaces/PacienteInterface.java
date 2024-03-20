@@ -22,7 +22,7 @@ public interface PacienteInterface {
     Paciente inserir(Paciente paciente) throws SQLException;
     
     @WebMethod
-    Paciente atualizar(Paciente paciente) throws SQLException;
+    Paciente atualizar(Paciente paciente) throws SQLException, Exception;
     
     @WebMethod 
     void deletar(int id)throws SQLException;

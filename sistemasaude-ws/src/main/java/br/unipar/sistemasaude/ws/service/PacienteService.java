@@ -24,7 +24,7 @@ public class PacienteService {
         return pacienteRepository.insert(paciente);
     }
 
-    public Paciente atualizar(Paciente paciente) {
+    public Paciente atualizar(Paciente paciente)  throws Exception {
         PacienteRepository pacienteRepository = new PacienteRepository();
         return pacienteRepository.atualizar(paciente);
     }
