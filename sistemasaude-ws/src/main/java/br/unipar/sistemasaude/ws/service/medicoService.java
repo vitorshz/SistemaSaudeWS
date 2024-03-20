@@ -25,7 +25,7 @@ public class medicoService {
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.insert(medicoDto);
     }
-    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO updateDTO) throws SQLException {
+    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO updateDTO) throws Exception {
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.update(updateDTO);
     }

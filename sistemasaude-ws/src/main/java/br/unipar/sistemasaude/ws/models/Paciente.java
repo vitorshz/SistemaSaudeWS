@@ -7,6 +7,7 @@ public class Paciente {
     private String email;
     private String telefone;
     private String Cpf;
+    private boolean isActive;
 
     public int getId() {
         return id;
@@ -14,6 +15,14 @@ public class Paciente {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getNome() {
@@ -46,6 +55,18 @@ public class Paciente {
 
     public void setCpf(String Cpf) {
         this.Cpf = Cpf;
+    }
+
+    public Paciente(int id, String nome, String email, String telefone, String Cpf, boolean isActive) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.Cpf = Cpf;
+        this.isActive = isActive;
+    }
+
+    public Paciente() {
     }
     
 }

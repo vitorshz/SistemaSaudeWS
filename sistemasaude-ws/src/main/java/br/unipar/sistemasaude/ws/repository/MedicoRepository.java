@@ -27,8 +27,8 @@ public class MedicoRepository {
     public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException, EspecialidadeException {
         
         String query = 
-                "INSERT INTO MEDICO (NOME, EMAIL, TELEFONE, CRM, ESPECIALIZACAO,ENDERECOCOMPLETO)"
-                + "VALUES(?, ?, ?, ?, ?,?);";
+                "INSERT INTO MEDICO (NOME, EMAIL, TELEFONE, CRM, ESPECIALIZACAO,ENDERECOCOMPLETO,ISACTIVE)"
+                + "VALUES(?, ?, ?, ?, ?,?,?);";
         
         Connection conn = null;
         PreparedStatement ps = null;
@@ -49,6 +49,7 @@ public class MedicoRepository {
             ps.setInt(4, medicoDto.getCrm());
             ps.setString(5, medicoDto.getEspecializacao());
             ps.setString(6, enderecocompleto);
+            ps.setBoolean(7, true);
             ps.executeUpdate();
             
             rs = ps.getGeneratedKeys();
@@ -67,13 +68,30 @@ public class MedicoRepository {
         
         return medicoDto;
     }
-    public MedicoUpdateRequestDTO update(MedicoUpdateRequestDTO medicoDto) throws SQLException {
+    public MedicoUpdateRequestDTO update(MedicoUpdateRequestDTO medicoDto) throws Exception {
+        String queryValidateIsActive = "SELECT * FROM MEDICO WHERE NOME = ? ISACTIVE = TRUE";
         String query = "UPDATE MEDICO SET NOME = ?, TELEFONE = ? ,ENDERECOCOMPLETO = ?";
 
         Connection conn = null;
         PreparedStatement ps = null;
         String enderecocompleto = medicoDto.getLogradouro() + " "+ medicoDto.getNumero() + " "+ medicoDto.getComplemento() + " "+ medicoDto.getBairro();
-
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(queryValidateIsActive);
+            ps.setString(1, medicoDto.getNome());
+            ResultSet ifIsActive = ps.executeQuery();
+            if (ifIsActive == null){
+                throw new Exception("dado não encontrado");
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    
         try {
             conn = new ConnectionFactory().getConnection();
             ps = conn.prepareStatement(query);
@@ -91,5 +109,6 @@ public class MedicoRepository {
             }
         }
 
-        return medicoDto;    }
+        return medicoDto;    
+    }
 }
