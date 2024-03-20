@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.MedicoRequest;
+import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
+import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Medico;
 
@@ -22,7 +24,7 @@ public class MedicoRepository {
         return null;
     }
 
-    public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException {
+    public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException, EspecialidadeException {
         
         String query = 
                 "INSERT INTO MEDICO (NOME, EMAIL, TELEFONE, CRM, ESPECIALIZACAO,ENDERECOCOMPLETO)"
@@ -31,7 +33,10 @@ public class MedicoRepository {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String enderecocompleto = medicoDto.getLogradouro() + medicoDto.getNumero() + medicoDto.getComplemento() + medicoDto.getBairro();
+        if(medicoDto.getEspecializacao() != "Ortopedia" || medicoDto.getEspecializacao() != "Cardiologia" || medicoDto.getEspecializacao() != "Ginecologia" || medicoDto.getEspecializacao()!= "Dermatologia"){
+            throw new EspecialidadeException();
+        }
+        String enderecocompleto = medicoDto.getLogradouro() + " "+ medicoDto.getNumero() + " "+ medicoDto.getComplemento() + " "+ medicoDto.getBairro();
         try {
             
             conn = new ConnectionFactory().getConnection();
@@ -62,4 +67,29 @@ public class MedicoRepository {
         
         return medicoDto;
     }
+    public MedicoUpdateRequestDTO update(MedicoUpdateRequestDTO medicoDto) throws SQLException {
+        String query = "UPDATE PACIENTE SET NOME = ?, TELEFONE = ? ,ENDERECOCOMPLETO = ?";
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String enderecocompleto = medicoDto.getLogradouro() + " "+ medicoDto.getNumero() + " "+ medicoDto.getComplemento() + " "+ medicoDto.getBairro();
+
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, medicoDto.getNome());
+            ps.setInt(3, medicoDto.getTelefone());
+            ps.setString(6, enderecocompleto);
+            ps.executeUpdate();
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return medicoDto;    }
 }

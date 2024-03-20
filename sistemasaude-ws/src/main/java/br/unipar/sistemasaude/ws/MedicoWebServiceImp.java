@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.MedicoRequest;
+import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
+import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.interfaces.MedicoInterface;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.service.medicoService;
@@ -33,19 +35,18 @@ public class MedicoWebServiceImp implements MedicoInterface{
 
 
     @Override
-    public Medico atualizar(Medico medico) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws SQLException {
+       medicoService medicoService = new medicoService();
+       return medicoService.atualizar(medico);
     }
 
     @Override
     public void deletar(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deletar'");
     }
 
     @Override
-    public MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException, ValidationException {
+    public MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException, ValidationException, EspecialidadeException {
         medicoService medicoService = new medicoService();
         return medicoService.insert(medicoDto);
     }

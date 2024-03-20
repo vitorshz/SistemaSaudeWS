@@ -1,7 +1,8 @@
-package br.unipar.sistemasaude.ws.services;
+package br.unipar.sistemasaude.ws.service;
 
 import br.unipar.sistemasaude.ws.models.Paciente;
-import br.unipar.sistemasaude.ws.repositories.PacienteRepository;
+import br.unipar.sistemasaude.ws.repository.PacienteRepository;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 

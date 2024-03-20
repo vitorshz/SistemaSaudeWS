@@ -4,8 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.MedicoRequest;
+import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
+import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.models.Medico;
+import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.repository.MedicoRepository;
+import br.unipar.sistemasaude.ws.repository.PacienteRepository;
 
 public class medicoService {
      public ArrayList<Medico> listAll() {
@@ -18,9 +22,17 @@ public class medicoService {
         return medicoRepository.findById(id);
     }
     
-    public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException {
+    public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException, EspecialidadeException {
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.insert(medicoDto);
     }
-    
+    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO updateDTO) throws SQLException {
+        MedicoRepository pacienteRepository = new MedicoRepository();
+        return pacienteRepository.update(updateDTO);
+    }
+
+    public PacienteRepository delete(int id) {
+        PacienteRepository pacienteRepository = new PacienteRepository();
+        return pacienteRepository.delete(id);
+    }
 }

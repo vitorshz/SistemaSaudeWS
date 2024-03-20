@@ -5,7 +5,6 @@ import jakarta.jws.WebService;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import br.unipar.sistemasaude.ws.models.Paciente;
-import jakarta.jws.WebParam;
 
 @WebService
 public interface PacienteInterface {
@@ -20,7 +19,7 @@ public interface PacienteInterface {
     Paciente findById(int id) throws SQLException;
     
     @WebMethod
-    Paciente inserir(Paciente paciente);
+    Paciente inserir(Paciente paciente) throws SQLException;
     
     @WebMethod
     Paciente atualizar(Paciente paciente) throws SQLException;
