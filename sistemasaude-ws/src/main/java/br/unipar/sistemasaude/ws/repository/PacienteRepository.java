@@ -31,8 +31,8 @@ public class PacienteRepository {
 
         String query
                 = "INSERT INTO PACIENTE (NOME, EMAIL, TELEFONE, "
-                + "CPF) "
-                + "VALUES(?, ?, ?, ?);";
+                + "CPF,ISACTIVE) "
+                + "VALUES(?, ?, ?, ?,?);";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -45,6 +45,7 @@ public class PacienteRepository {
             ps.setString(2, paciente.getEmail());
             ps.setString(3, paciente.getTelefone());
             ps.setString(4, paciente.getCpf());
+            ps.setInt(5, 1);
             ps.executeUpdate();
 
             rs = ps.getGeneratedKeys();
@@ -69,7 +70,7 @@ public class PacienteRepository {
     }
 
     public Paciente update(Paciente paciente) throws Exception {
-        String queryValidateIsActive = "SELECT * FROM PACIENTE WHERE NOME = ? ISACTIVE = TRUE";
+        String queryValidateIsActive = "SELECT * FROM PACIENTE WHERE NOME = ? ISACTIVE = 1";
         String query = "UPDATE PACIENTE SET NOME = ?, EMAIL = ?, TELEFONE = ?, cpf = ? WHERE id = ?";
 
         Connection conn = null;

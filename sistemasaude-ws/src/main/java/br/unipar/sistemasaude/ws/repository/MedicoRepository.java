@@ -49,7 +49,7 @@ public class MedicoRepository {
             ps.setInt(4, medicoDto.getCrm());
             ps.setString(5, medicoDto.getEspecializacao());
             ps.setString(6, enderecocompleto);
-            ps.setBoolean(7, true);
+            ps.setInt(7, 1);
             ps.executeUpdate();
             
             rs = ps.getGeneratedKeys();
@@ -69,7 +69,7 @@ public class MedicoRepository {
         return medicoDto;
     }
     public MedicoUpdateRequestDTO update(MedicoUpdateRequestDTO medicoDto) throws Exception {
-        String queryValidateIsActive = "SELECT * FROM MEDICO WHERE NOME = ? ISACTIVE = TRUE";
+        String queryValidateIsActive = "SELECT * FROM MEDICO WHERE NOME = ? ISACTIVE = 1";
         String query = "UPDATE MEDICO SET NOME = ?, TELEFONE = ? ,ENDERECOCOMPLETO = ?";
 
         Connection conn = null;
