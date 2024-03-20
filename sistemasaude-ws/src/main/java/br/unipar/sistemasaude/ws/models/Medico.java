@@ -17,6 +17,7 @@ public class Medico {
     private int crm;
     private String especializacao;
     private String enderecocompleto;
+    private boolean isActive;
 
     public int getId() {
         return id;
@@ -32,6 +33,14 @@ public class Medico {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getEmail() {
@@ -74,7 +83,7 @@ public class Medico {
         this.enderecocompleto = enderecocompleto;
     }
 
-    public Medico(int id, String nome, String email, int telefone, int crm, String especializacao, String enderecocompleto) {
+    public Medico(int id, String nome, String email, int telefone, int crm, String especializacao, String enderecocompleto, boolean isActive) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -82,7 +91,10 @@ public class Medico {
         this.crm = crm;
         this.especializacao = especializacao;
         this.enderecocompleto = enderecocompleto;
+        this.isActive = isActive;
     }
+
+    
     public Medico() {}
 
  

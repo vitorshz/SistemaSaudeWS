@@ -35,7 +35,7 @@ public class MedicoWebServiceImp implements MedicoInterface{
 
 
     @Override
-    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws SQLException {
+    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws Exception {
        medicoService medicoService = new medicoService();
        return medicoService.atualizar(medico);
     }

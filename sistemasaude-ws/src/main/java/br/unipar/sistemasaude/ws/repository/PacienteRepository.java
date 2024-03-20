@@ -68,13 +68,29 @@ public class PacienteRepository {
         return paciente;
     }
 
-    public Paciente update(Paciente paciente) throws SQLException {
+    public Paciente update(Paciente paciente) throws Exception {
+        String queryValidateIsActive = "SELECT * FROM PACIENTE WHERE NOME = ? ISACTIVE = TRUE";
         String query = "UPDATE PACIENTE SET NOME = ?, EMAIL = ?, TELEFONE = ?, cpf = ? WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement ps = null;
         
-
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(queryValidateIsActive);
+            ps.setString(1, paciente.getNome());
+            ResultSet ifIsActive = ps.executeQuery();
+            if (ifIsActive == null){
+                throw new Exception("dado não encontrado");
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
         try {
             conn = new ConnectionFactory().getConnection();
             ps = conn.prepareStatement(query);
