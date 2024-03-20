@@ -68,7 +68,7 @@ public class MedicoRepository {
         return medicoDto;
     }
     public MedicoUpdateRequestDTO update(MedicoUpdateRequestDTO medicoDto) throws SQLException {
-        String query = "UPDATE PACIENTE SET NOME = ?, TELEFONE = ? ,ENDERECOCOMPLETO = ?";
+        String query = "UPDATE MEDICO SET NOME = ?, TELEFONE = ? ,ENDERECOCOMPLETO = ?";
 
         Connection conn = null;
         PreparedStatement ps = null;

@@ -7,7 +7,6 @@ import br.unipar.sistemasaude.ws.dto.MedicoRequest;
 import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.models.Medico;
-import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.repository.MedicoRepository;
 import br.unipar.sistemasaude.ws.repository.PacienteRepository;
 
@@ -27,12 +26,12 @@ public class medicoService {
         return medicoRepository.insert(medicoDto);
     }
     public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO updateDTO) throws SQLException {
-        MedicoRepository pacienteRepository = new MedicoRepository();
-        return pacienteRepository.update(updateDTO);
+        MedicoRepository medicoRepository = new MedicoRepository();
+        return medicoRepository.update(updateDTO);
     }
 
     public PacienteRepository delete(int id) {
-        PacienteRepository pacienteRepository = new PacienteRepository();
-        return pacienteRepository.delete(id);
+        PacienteRepository medicoRepository = new PacienteRepository();
+        return medicoRepository.delete(id);
     }
 }
