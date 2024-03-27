@@ -26,7 +26,7 @@ public class PacienteService {
 
     public Paciente atualizar(Paciente paciente)  throws Exception {
         PacienteRepository pacienteRepository = new PacienteRepository();
-        return pacienteRepository.atualizar(paciente);
+        return pacienteRepository.update(paciente);
     }
 
     public PacienteRepository delete(int id) {

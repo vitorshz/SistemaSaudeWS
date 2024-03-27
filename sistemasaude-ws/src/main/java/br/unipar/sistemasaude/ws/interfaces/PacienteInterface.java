@@ -19,7 +19,7 @@ public interface PacienteInterface {
     Paciente findById(int id) throws SQLException;
     
     @WebMethod
-    Paciente inserir(Paciente paciente) throws SQLException;
+    Paciente inserirPaciente(Paciente paciente) throws SQLException;
     
     @WebMethod
     Paciente atualizar(Paciente paciente) throws SQLException, Exception;

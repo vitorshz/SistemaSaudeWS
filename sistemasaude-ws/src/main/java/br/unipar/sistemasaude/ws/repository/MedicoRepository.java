@@ -36,7 +36,8 @@ public class MedicoRepository {
         if(medicoDto.getEspecializacao() != "Ortopedia" || medicoDto.getEspecializacao() != "Cardiologia" || medicoDto.getEspecializacao() != "Ginecologia" || medicoDto.getEspecializacao()!= "Dermatologia"){
             throw new EspecialidadeException();
         }
-        String enderecocompleto = medicoDto.getLogradouro() + " "+ medicoDto.getNumero() + " "+ medicoDto.getComplemento() + " "+ medicoDto.getBairro();
+        String enderecocompleto = medicoDto.getLogradouro() + " "+ medicoDto.getNumero() 
+                + " "+ medicoDto.getComplemento() + " "+ medicoDto.getBairro();
         try {
             
             conn = new ConnectionFactory().getConnection();
