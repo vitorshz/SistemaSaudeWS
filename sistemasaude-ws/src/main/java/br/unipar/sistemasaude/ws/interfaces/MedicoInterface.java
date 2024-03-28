@@ -33,7 +33,7 @@ public interface MedicoInterface {
     MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException,ValidationException, EspecialidadeException;
     
     @WebMethod
-    MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws SQLException, Exception;
+    void atualizar(MedicoUpdateRequestDTO medico) throws SQLException, Exception;
     
     @WebMethod
     void deletar(int id);

@@ -33,14 +33,16 @@ public class MedicoWebServiceImp implements MedicoInterface{
     @Override
     public Medico findById(int id) {
         medicoService medicoService = new medicoService();
-        return medicoService.findById(id);
+        Medico medico = medicoService.findById(id);
+        return medico;
     }
 
 
     @Override
-    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO medico) throws Exception {
+    public void atualizar(MedicoUpdateRequestDTO medico) throws Exception {
        medicoService medicoService = new medicoService();
-       return medicoService.atualizar(medico);
+      medicoService.atualizar(medico);
+
     }
 
     @Override

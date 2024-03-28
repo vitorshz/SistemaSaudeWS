@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 @WebService(endpointInterface = "br.unipar.sistemasaude.ws.interfaces.PacienteInterface")
 public class PacienteWebServiceImp implements PacienteInterface{
-
     @Override
     public ArrayList<Paciente> findPaciente(String nome) {
         PacienteService pacienteService = new PacienteService();
@@ -36,9 +35,9 @@ public class PacienteWebServiceImp implements PacienteInterface{
     }
 
     @Override
-    public Paciente atualizar(Paciente paciente) throws Exception {
+    public void atualizar(Paciente paciente) throws Exception {
         PacienteService pacienteService = new PacienteService();
-        return pacienteService.atualizar(paciente);
+        pacienteService.atualizar(paciente);
     }
 
     @Override
@@ -46,6 +45,4 @@ public class PacienteWebServiceImp implements PacienteInterface{
         PacienteService pacienteService = new PacienteService();
         pacienteService.delete(id);
     }
-    
-    
 }
