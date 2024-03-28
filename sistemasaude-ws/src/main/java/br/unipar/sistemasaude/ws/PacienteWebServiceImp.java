@@ -12,12 +12,7 @@ import java.util.ArrayList;
 @WebService(endpointInterface = "br.unipar.sistemasaude.ws.interfaces.PacienteInterface")
 public class PacienteWebServiceImp implements PacienteInterface{
 
-    @Override
-    public ArrayList<Paciente> findPaciente(String nome) {
-        PacienteService pacienteService = new PacienteService();
-        return pacienteService.findPaciente(nome);
-    }
-
+    
     @Override
     public ArrayList<Paciente> listAll() throws SQLException {
         PacienteService pacienteService = new PacienteService();
@@ -45,6 +40,11 @@ public class PacienteWebServiceImp implements PacienteInterface{
     public void deletar(int id) throws SQLException {
         PacienteService pacienteService = new PacienteService();
         pacienteService.delete(id);
+    }
+
+    @Override
+    public ArrayList<Paciente> findPaciente(String nome) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

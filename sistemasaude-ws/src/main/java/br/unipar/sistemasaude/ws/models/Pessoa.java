@@ -28,6 +28,14 @@ public abstract class Pessoa {
     public Pessoa() {
     }
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+    
     public int getPessoaid() {
         return pessoaid;
     }
