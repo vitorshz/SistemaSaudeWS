@@ -5,7 +5,6 @@
 package br.unipar.sistemasaude.ws.repository;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Paciente;
-import br.unipar.sistemasaude.ws.models.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,22 +21,43 @@ public class PacienteRepository {
     public PacienteRepository() {
     }
 
-    public ArrayList<Paciente> findPaciente(String nome) {
-        return null;
+    public ArrayList<Paciente> listAll() throws SQLException {
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = new ConnectionFactory().getConnection();
+            String query = "SELECT * FROM paciente";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setPacienteId(rs.getInt("pacienteid"));
+                paciente.setPessoaid(rs.getInt("pessoaid"));
+                
+
+                pacientes.add(paciente);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
         }
 
-    public ArrayList<Paciente> listAll() {
-        return null;
+        return pacientes;
     }
 
     public Paciente insert(Paciente paciente) throws SQLException {
         Connection conn = null;
-    PreparedStatement psPessoa = null;
-    PreparedStatement psPaciente = null;
-    ResultSet rsPessoa = null;
-    ResultSet rsPaciente = null;
+        PreparedStatement psPessoa = null;
+        PreparedStatement psPaciente = null;
+        ResultSet rsPessoa = null;
+        ResultSet rsPaciente = null;
 
-    try {
+        try {
         conn = new ConnectionFactory().getConnection();
 
         
@@ -70,8 +90,6 @@ public class PacienteRepository {
             throw new SQLException("Falha ao inserir a pessoa na tabela pessoa.");
         }
          } finally {
-        // Fechando recursos em um bloco finally para garantir que sejam sempre fechados,
-        // mesmo se uma exceção for lançada
         if (rsPessoa != null) rsPessoa.close();
         if (psPessoa != null) psPessoa.close();
         if (rsPaciente != null) rsPaciente.close();
@@ -83,48 +101,36 @@ public class PacienteRepository {
     }
 
     public Paciente update(Paciente paciente) throws Exception {
-        String queryValidateIsActive = "SELECT * FROM PACIENTE WHERE NOME = ? ISACTIVE = 1";
-        String query = "UPDATE PACIENTE SET NOME = ?, EMAIL = ?, TELEFONE = ?, cpf = ? WHERE id = ?";
+     Connection conn = null;
+    PreparedStatement ps = null;
 
-        Connection conn = null;
-        PreparedStatement ps = null;
+    try {
+        conn = new ConnectionFactory().getConnection();
         
-        try {
-            conn = new ConnectionFactory().getConnection();
-            ps = conn.prepareStatement(queryValidateIsActive);
-            ps.setString(1, paciente.getNome());
-            ResultSet ifIsActive = ps.executeQuery();
-            if (ifIsActive == null){
-                throw new Exception("dado não encontrado");
-            }
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        try {
-            conn = new ConnectionFactory().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, paciente.getNome());
-            ps.setString(2, paciente.getEmail());
-            ps.setString(3, paciente.getTelefone());
-            ps.setString(4, paciente.getCpf());
+        String updatePessoaQuery = "UPDATE pessoa SET nome = ?, email = ?, telefone = ?, "
+                + "cpf = ?, isActive = ? WHERE pessoaid = ?";
+        ps = conn.prepareStatement(updatePessoaQuery);
+        ps.setString(1, paciente.getNome());
+        ps.setString(2, paciente.getEmail());
+        ps.setString(3, paciente.getTelefone());
+        ps.setString(4, paciente.getCpf());
+        ps.setInt(5, paciente.getIsActive());
+        ps.setInt(6, paciente.getPessoaid());
+        ps.executeUpdate();
 
-            ps.executeUpdate();
+        
+        String updatePacienteQuery = "UPDATE paciente SET WHERE pessoaid = ?";
+        ps = conn.prepareStatement(updatePacienteQuery);
+        ps.setInt(2, paciente.getPessoaid());
+        ps.executeUpdate();
 
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
+    } finally {
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    }
 
-        return paciente;    }
+    return paciente;
+    }
 
     
     public PacienteRepository delete(int id) {

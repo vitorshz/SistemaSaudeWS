@@ -9,12 +9,8 @@ import java.util.ArrayList;
 
 public class PacienteService {
 
-    public ArrayList<Paciente> findPaciente(String nome) {
-        PacienteRepository pacienteRepository = new PacienteRepository();
-        return pacienteRepository.findPaciente(nome);    
-    }
 
-    public ArrayList<Paciente> listAll() {
+    public ArrayList<Paciente> listAll() throws SQLException {
         PacienteRepository pacienteRepository = new PacienteRepository();
         return pacienteRepository.listAll();
     }
