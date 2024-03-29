@@ -13,15 +13,13 @@ public abstract class Pessoa {
     private String nome;
     private String email;
     private String telefone;
-    private String Cpf;
     private int isActive;
 
-    public Pessoa(int pessoaid, String nome, String email, String telefone, String Cpf, int isActive) {
+    public Pessoa(int pessoaid, String nome, String email, String telefone, int isActive) {
         this.pessoaid = pessoaid;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        this.Cpf = Cpf;
         this.isActive = isActive;
     }
     
@@ -68,13 +66,7 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    public String getCpf() {
-        return Cpf;
-    }
 
-    public void setCpf(String Cpf) {
-        this.Cpf = Cpf;
-    }
 
     
 

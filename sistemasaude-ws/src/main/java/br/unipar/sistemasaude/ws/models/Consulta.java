@@ -12,4 +12,64 @@ public class Consulta {
     private MotivoCancelamentosEnum motivoCancelamento;
     private int isActive;
 
-}
+    public Consulta(int id, int pacienteid, int medicoid, LocalDateTime datahora, MotivoCancelamentosEnum motivoCancelamento, int isActive) {
+        this.id = id;
+        this.pacienteid = pacienteid;
+        this.medicoid = medicoid;
+        this.datahora = datahora;
+        this.motivoCancelamento = motivoCancelamento;
+        this.isActive = isActive;
+    }
+    
+    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPacienteid() {
+        return pacienteid;
+    }
+
+    public void setPacienteid(int pacienteid) {
+        this.pacienteid = pacienteid;
+    }
+
+    public int getMedicoid() {
+        return medicoid;
+    }
+
+    public void setMedicoid(int medicoid) {
+        this.medicoid = medicoid;
+    }
+
+    public LocalDateTime getDatahora() {
+        return datahora;
+    }
+
+    public void setDatahora(LocalDateTime datahora) {
+        this.datahora = datahora;
+    }
+
+    public MotivoCancelamentosEnum getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(MotivoCancelamentosEnum motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
+    }
+
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+    
+    
+    }
