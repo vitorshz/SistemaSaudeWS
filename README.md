@@ -2,7 +2,7 @@
 
 # requisitos de funcionaidade
 
-- [ ]  Deve ser possivel cadastrar um medico;
+- [x]  Deve ser possivel cadastrar um medico;
 - [ ]  deve ser possivel listar os medicos cadastrados;
 - [ ]  deve ser possivel atualizar um medico por id;
 - [ ]  deve ser possivel desativar um medico do sistema;
