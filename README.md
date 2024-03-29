@@ -60,4 +60,4 @@
 
 # banco de dados
 
-![Database ER diagram (crow's foot).png](bosin%20sistema%20saude%20ws%20e0e7b425704047a0b431b5475e18182d/Database_ER_diagram_(crows_foot)%201.png)
+![drawSQL-image-export-2024-03-29.png](bosin%20sistema%20saude%20ws%20e0e7b425704047a0b431b5475e18182d/drawSQL-image-export-2024-03-29.png)
