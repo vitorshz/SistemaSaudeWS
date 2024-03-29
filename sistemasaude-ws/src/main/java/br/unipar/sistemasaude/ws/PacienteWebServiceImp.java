@@ -20,7 +20,7 @@ public class PacienteWebServiceImp implements PacienteInterface{
 
     @Override
     public Paciente findByIdPaciente(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

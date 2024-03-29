@@ -14,6 +14,7 @@ public class Medico extends Pessoa{
     private int id;
     private int crm;
     private String especializacao;
+    private int idPessoa;
 
 
     public int getId() {
@@ -40,11 +41,12 @@ public class Medico extends Pessoa{
         this.especializacao = especializacao;
     }
 
-    public Medico(int id, int crm, String especializacao, int pessoaid, String nome, String email, String telefone, int isActive) {
+    public Medico(int id, int crm, String especializacao, int pessoaid, String nome, String email, String telefone, int isActive,int idPessoa) {
         super(pessoaid, nome, email, telefone, isActive);
         this.id = id;
         this.crm = crm;
         this.especializacao = especializacao;
+        this.idPessoa = idPessoa;
     }
 
     

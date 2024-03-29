@@ -9,18 +9,22 @@ package br.unipar.sistemasaude.ws.models;
  * @author lucia
  */
 public abstract class Pessoa {
-    private int pessoaid;
+    private int id;
     private String nome;
     private String email;
     private String telefone;
     private int isActive;
+    private int medicoId;
+    private int pacienteId;
 
-    public Pessoa(int pessoaid, String nome, String email, String telefone, int isActive) {
-        this.pessoaid = pessoaid;
+    public Pessoa(int id, String nome, String email, String telefone, int isActive,int medicoId,int pacienteId) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.isActive = isActive;
+        this.medicoId = medicoId;
+        this.pacienteId = pacienteId;
     }
     
     public Pessoa() {
@@ -34,12 +38,12 @@ public abstract class Pessoa {
         this.isActive = isActive;
     }
     
-    public int getPessoaid() {
-        return pessoaid;
+    public int getid() {
+        return id;
     }
 
-    public void setPessoaid(int pessoaid) {
-        this.pessoaid = pessoaid;
+    public void setid(int id) {
+        this.id = id;
     }
     
     public String getNome() {

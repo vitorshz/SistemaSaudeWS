@@ -4,11 +4,14 @@ package br.unipar.sistemasaude.ws.models;
 public class Paciente extends Pessoa{
     private int pacienteId;
     private String cpf;
+    private int idPessoa;
 
-    public Paciente(int pacienteId, String cpf, int pessoaid, String nome, String email, String telefone, int isActive) {
+
+    public Paciente(int pacienteId, String cpf, int pessoaid, String nome, String email, String telefone, int isActive, int idPessoa) {
         super(pessoaid, nome, email, telefone, isActive);
         this.pacienteId = pacienteId;
         this.cpf = cpf;
+        this.idPessoa = idPessoa;
     }
 
    
