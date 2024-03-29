@@ -14,38 +14,26 @@ public abstract class Pessoa {
     private String email;
     private String telefone;
     private int isActive;
-    private int medicoId;
-    private int pacienteId;
 
-    public Pessoa(int id, String nome, String email, String telefone, int isActive,int medicoId,int pacienteId) {
+    public Pessoa(int id, String nome, String email, String telefone, int isActive) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.isActive = isActive;
-        this.medicoId = medicoId;
-        this.pacienteId = pacienteId;
     }
-    
+
     public Pessoa() {
     }
 
-    public int getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(int isActive) {
-        this.isActive = isActive;
-    }
-    
-    public int getid() {
+    public int getId() {
         return id;
     }
 
-    public void setid(int id) {
+    public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -70,11 +58,24 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
+    
 
 
+}
+
+
+    
     
 
     
     
         
-}
+

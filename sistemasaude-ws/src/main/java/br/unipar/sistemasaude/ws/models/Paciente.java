@@ -2,21 +2,25 @@ package br.unipar.sistemasaude.ws.models;
 
 
 public class Paciente extends Pessoa{
-    private int pacienteId;
+    private int pacienteid;
     private String cpf;
-    private int idPessoa;
 
-
-    public Paciente(int pacienteId, String cpf, int pessoaid, String nome, String email, String telefone, int isActive, int idPessoa) {
-        super(pessoaid, nome, email, telefone, isActive);
-        this.pacienteId = pacienteId;
+    public Paciente(int pacienteid, String cpf, int id, String nome, String email, String telefone, int isActive) {
+        super(id, nome, email, telefone, isActive);
+        this.pacienteid = pacienteid;
         this.cpf = cpf;
-        this.idPessoa = idPessoa;
     }
 
-   
     public Paciente() {
-        
+    }
+    
+
+    public int getPacienteid() {
+        return pacienteid;
+    }
+
+    public void setPacienteid(int pacienteid) {
+        this.pacienteid = pacienteid;
     }
 
     public String getCpf() {
@@ -26,12 +30,6 @@ public class Paciente extends Pessoa{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
-    public int getPacienteId() {
-        return pacienteId;
-    }
 
-    public void setPacienteId(int pacienteId) {
-        this.pacienteId = pacienteId;
-    }
+    
 }

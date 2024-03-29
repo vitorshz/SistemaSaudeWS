@@ -65,5 +65,15 @@ public class Endereco {
         this.bairro = bairro;
     }
 
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+    
+    
+
     
     }

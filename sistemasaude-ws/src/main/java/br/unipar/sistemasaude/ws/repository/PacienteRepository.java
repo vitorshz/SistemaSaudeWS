@@ -35,8 +35,8 @@ public class PacienteRepository {
 
             while (rs.next()) {
                 Paciente paciente = new Paciente();
-                paciente.setPacienteId(rs.getInt("pacienteid"));
-                paciente.setPessoaid(rs.getInt("pessoaid"));
+                paciente.setPacienteid(rs.getInt("pacienteid"));
+                paciente.setId(rs.getInt("pessoaid"));
                 
 
                 pacientes.add(paciente);
@@ -59,8 +59,7 @@ public class PacienteRepository {
 
         try {
         conn = new ConnectionFactory().getConnection();
-
-        
+   
         String queryPessoa = "INSERT INTO pessoa (nome, email, telefone, cpf, isActive) VALUES (?, ?, ?, ?, ?)";
         psPessoa = conn.prepareStatement(queryPessoa, Statement.RETURN_GENERATED_KEYS);
         psPessoa.setString(1, paciente.getNome()); 
@@ -84,7 +83,7 @@ public class PacienteRepository {
             
             rsPaciente = psPaciente.getGeneratedKeys();
             if (rsPaciente.next()) {
-                paciente.setPacienteId(rsPaciente.getInt(1)); 
+                paciente.setPacienteid(rsPaciente.getInt(1)); 
             }
         } else {
             throw new SQLException("Falha ao inserir a pessoa na tabela pessoa.");
@@ -115,13 +114,13 @@ public class PacienteRepository {
         ps.setString(3, paciente.getTelefone());
         ps.setString(4, paciente.getCpf());
         ps.setInt(5, paciente.getIsActive());
-        ps.setInt(6, paciente.getPessoaid());
+        ps.setInt(6, paciente.getId());
         ps.executeUpdate();
 
         
         String updatePacienteQuery = "UPDATE paciente SET WHERE pessoaid = ?";
         ps = conn.prepareStatement(updatePacienteQuery);
-        ps.setInt(2, paciente.getPessoaid());
+        ps.setInt(2, paciente.getId());
         ps.executeUpdate();
 
     } finally {

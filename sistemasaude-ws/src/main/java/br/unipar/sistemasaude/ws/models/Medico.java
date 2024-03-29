@@ -11,20 +11,28 @@ package br.unipar.sistemasaude.ws.models;
 
 public class Medico extends Pessoa{
     
-    private int id;
+    private int medicoid;
     private int crm;
     private String especializacao;
-    private int idPessoa;
 
-
-    public int getId() {
-        return id;
+    public Medico(int medicoid, int crm, String especializacao, int id, String nome, String email, String telefone, int isActive) {
+        super(id, nome, email, telefone, isActive);
+        this.medicoid = medicoid;
+        this.crm = crm;
+        this.especializacao = especializacao;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Medico() {
     }
-    
+
+    public int getMedicoid() {
+        return medicoid;
+    }
+
+    public void setMedicoid(int medicoid) {
+        this.medicoid = medicoid;
+    }
+
     public int getCrm() {
         return crm;
     }
@@ -41,18 +49,12 @@ public class Medico extends Pessoa{
         this.especializacao = especializacao;
     }
 
-    public Medico(int id, int crm, String especializacao, int pessoaid, String nome, String email, String telefone, int isActive,int idPessoa) {
-        super(pessoaid, nome, email, telefone, isActive);
-        this.id = id;
-        this.crm = crm;
-        this.especializacao = especializacao;
-        this.idPessoa = idPessoa;
-    }
+    
 
-    
-    public Medico() {
-    
-    }
+   
+
+
+   
 
  
 }
