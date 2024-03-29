@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class PacienteWebServiceImp implements PacienteInterface{
     
     @Override
-    public ArrayList<Paciente> listAll() throws SQLException {
+    public ArrayList<Paciente> listAllPacientes() throws SQLException {
         PacienteService pacienteService = new PacienteService();
         return pacienteService.listAll();
     }
 
     @Override
-    public Paciente findById(int id) throws SQLException {
+    public Paciente findByIdPaciente(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -30,20 +30,16 @@ public class PacienteWebServiceImp implements PacienteInterface{
     }
 
     @Override
-    public void atualizar(Paciente paciente) throws Exception {
+    public void atualizarPaciente(Paciente paciente) throws Exception {
         PacienteService pacienteService = new PacienteService();
         pacienteService.atualizar(paciente);
     }
 
     @Override
-    public void deletar(int id) throws SQLException {
+    public void deletarPaciente(int id) throws SQLException {
         PacienteService pacienteService = new PacienteService();
         pacienteService.delete(id);
     }
 
-    @Override
-    public ArrayList<Paciente> findPaciente(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

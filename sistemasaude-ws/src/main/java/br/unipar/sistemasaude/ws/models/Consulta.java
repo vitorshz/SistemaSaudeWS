@@ -21,7 +21,6 @@ public class Consulta {
         this.isActive = isActive;
     }
     
-    
 
     public int getId() {
         return id;

@@ -24,18 +24,18 @@ import jakarta.validation.ValidationException;
 public interface MedicoInterface {
     
     @WebMethod
-    ArrayList<Medico> listAll();
+    ArrayList<Medico> listAllMedico();
     
     @WebMethod
-    Medico findById(@WebParam int id);
+    Medico findByIdMedico(@WebParam int id);
     
     @WebMethod
-    MedicoRequest inserir(MedicoRequest medicoDto) throws SQLException,ValidationException, EspecialidadeException;
+    MedicoRequest inserirMedico(MedicoRequest medicoDto) throws SQLException,ValidationException, EspecialidadeException;
     
     @WebMethod
-    void atualizar(MedicoUpdateRequestDTO medico) throws SQLException, Exception;
+    void atualizarMedico(MedicoUpdateRequestDTO medico) throws SQLException, Exception;
     
     @WebMethod
-    void deletar(int id);
+    void deletarMedico(int id);
 
 }

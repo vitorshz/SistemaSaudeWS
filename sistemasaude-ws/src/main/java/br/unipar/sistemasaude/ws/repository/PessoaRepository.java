@@ -46,7 +46,6 @@ public class PessoaRepository {
             ps.setString(1, pessoa.getNome());
             ps.setString(2, pessoa.getEmail());
             ps.setString(3, pessoa.getTelefone());
-            ps.setString(4, pessoa.getCpf());
             ps.setBoolean(5, true);
             
             ps.executeUpdate();
@@ -101,7 +100,6 @@ public class PessoaRepository {
             ps.setString(1, pessoa.getNome());
             ps.setString(2, pessoa.getEmail());
             ps.setString(3, pessoa.getTelefone());
-            ps.setString(4, pessoa.getCpf());
 
             ps.executeUpdate();
 
