@@ -53,7 +53,7 @@ public class PessoaRepository {
             rs = ps.getGeneratedKeys();
 
             rs.next();
-            pessoa.setPessoaid(rs.getInt(1));
+            pessoa.setId(rs.getInt(1));
 
         } finally {
             if (rs != null) {
