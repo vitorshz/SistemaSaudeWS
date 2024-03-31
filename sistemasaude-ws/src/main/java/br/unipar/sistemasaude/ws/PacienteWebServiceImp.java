@@ -41,10 +41,6 @@ public class PacienteWebServiceImp implements PacienteInterface{
         pacienteService.delete(id);
     }
 
-    @Override
-    public ArrayList<Paciente> findPaciente(String nome) {
-        throw new UnsupportedOperationException("Unimplemented method 'findPaciente'");
-    }
 
 
 }

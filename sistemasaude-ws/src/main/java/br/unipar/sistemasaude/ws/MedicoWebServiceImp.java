@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.unipar.sistemasaude.ws;
 
 import java.sql.SQLException;
@@ -16,10 +12,7 @@ import br.unipar.sistemasaude.ws.service.medicoService;
 import jakarta.jws.WebService;
 import jakarta.validation.ValidationException;
 
-/**
- *
- * @author lucia
- */
+
 
 @WebService(endpointInterface="br.unipar.sistemasaude.ws.interfaces.MedicoInterface")
 public class MedicoWebServiceImp implements MedicoInterface{

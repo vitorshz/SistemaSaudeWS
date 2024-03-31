@@ -1,5 +1,6 @@
 package br.unipar.sistemasaude.ws.service;
 
+
 import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.repository.PacienteRepository;
 
@@ -14,20 +15,27 @@ public class PacienteService {
         PacienteRepository pacienteRepository = new PacienteRepository();
         return pacienteRepository.listAll();
     }
+    
+    public Paciente findById(int id) throws SQLException{
+        PacienteRepository pacienteRepository = new PacienteRepository();
+        return pacienteRepository.findById(id);
+    }
 
     public Paciente insert(Paciente paciente) throws SQLException {
         PacienteRepository pacienteRepository = new PacienteRepository();
         return pacienteRepository.insert(paciente);
     }
 
-    public Paciente atualizar(Paciente paciente)  throws Exception {
+    public void atualizar(Paciente paciente)  throws Exception {
         PacienteRepository pacienteRepository = new PacienteRepository();
-        return pacienteRepository.update(paciente);
+        pacienteRepository.update(paciente);
     }
 
-    public PacienteRepository delete(int id) {
+    public void delete(int id) throws SQLException {
         PacienteRepository pacienteRepository = new PacienteRepository();
-        return pacienteRepository.delete(id);
+        pacienteRepository.delete(id);
     }
+    
+    
     
 }

@@ -8,9 +8,7 @@ import br.unipar.sistemasaude.ws.models.Paciente;
 
 @WebService
 public interface PacienteInterface {
-    
-    @WebMethod
-    ArrayList<Paciente> findPaciente(String nome);
+
     
     @WebMethod
     ArrayList<Paciente> listAllPacientes() throws SQLException;

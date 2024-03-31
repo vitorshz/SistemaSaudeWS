@@ -1,23 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.unipar.sistemasaude.ws.models;
 
-/**
- *
- * @author lucia
- */
+
 public class Endereco {
-    private int id;
+    private int enderecoid;
     private String logradouro;
     private int numero;
     private String complemento;
     private String bairro;
     private int idPessoa;
-
-    public Endereco(int id, String logradouro, int numero, String complemento, String bairro,int idPessoa) {
-        this.id = id;
+    
+    public Endereco() {
+    }
+    
+    public Endereco(int enderecoid, String logradouro, int numero, String complemento, String bairro, int idPessoa) {
+        this.enderecoid = enderecoid;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -25,13 +21,15 @@ public class Endereco {
         this.idPessoa = idPessoa;
     }
 
-    public int getId() {
-        return id;
+    public int getEnderecoid() {
+        return enderecoid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEnderecoid(int enderecoid) {
+        this.enderecoid = enderecoid;
     }
+
+    
 
     public String getLogradouro() {
         return logradouro;

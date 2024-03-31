@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.unipar.sistemasaude.ws.repository;
 
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
@@ -13,13 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author lucia
- */
-public class PessoaRepository {
 
+public class PessoaRepository {
+    private EnderecoRepository enderecorepository;
+    
     public PessoaRepository() {
+        enderecorepository = new EnderecoRepository();
     }
     
     public ArrayList<Pessoa> findPessoa(String nome) {
@@ -33,7 +28,7 @@ public class PessoaRepository {
     public Pessoa insertPessoa(Pessoa pessoa) throws SQLException {
 
         String query
-                = "INSERT INTO Pessoa (NOME, EMAIL, TELEFONE, CPF, ISACTIVE) VALUES (?, ?, ?, ?,?)";;
+                = "INSERT INTO Pessoa (NOME, EMAIL, TELEFONE,enderecoid, ISACTIVE) VALUES (?, ?, ?, ?,?)";;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -41,19 +36,20 @@ public class PessoaRepository {
        
         try {
             conn = new ConnectionFactory().getConnection();
-
+            
             ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pessoa.getNome());
             ps.setString(2, pessoa.getEmail());
             ps.setString(3, pessoa.getTelefone());
-            ps.setBoolean(5, true);
+            ps.setInt(4, pessoa.getEndereco().getEnderecoid());
+            ps.setInt(5, 1);
             
             ps.executeUpdate();
 
             rs = ps.getGeneratedKeys();
 
             rs.next();
-            pessoa.setId(rs.getInt(1));
+            pessoa.setPessoaid(rs.getInt(1));
 
         } finally {
             if (rs != null) {
@@ -70,52 +66,45 @@ public class PessoaRepository {
         return pessoa;
     }
 
-    public Pessoa updatePessoa(Pessoa pessoa) throws Exception {
-        String queryValidateIsActive = "SELECT * FROM PACIENTE WHERE NOME = ? ISACTIVE = 1";
-        String query = "UPDATE PACIENTE SET NOME = ?, EMAIL = ?, TELEFONE = ?, cpf = ? WHERE id = ?";
-
+    public void update(Pessoa pessoa) throws SQLException {
         Connection conn = null;
-        PreparedStatement ps = null;
-        
+        PreparedStatement psPessoa = null;
+
         try {
             conn = new ConnectionFactory().getConnection();
-            ps = conn.prepareStatement(queryValidateIsActive);
-            ps.setString(1, pessoa.getNome());
-            ResultSet ifIsActive = ps.executeQuery();
-            if (ifIsActive == null){
-                throw new Exception("dado não encontrado");
-            }
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        try {
-            conn = new ConnectionFactory().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, pessoa.getNome());
-            ps.setString(2, pessoa.getEmail());
-            ps.setString(3, pessoa.getTelefone());
 
-            ps.executeUpdate();
+            
+            String queryPessoa = "UPDATE pessoa SET nome = ?, email = ?, telefone = ?, enderecoid = ? WHERE id = ?";
+            psPessoa = conn.prepareStatement(queryPessoa);
+            psPessoa.setString(1, pessoa.getNome());
+            psPessoa.setString(2, pessoa.getEmail());
+            psPessoa.setString(3, pessoa.getTelefone());
+            psPessoa.setInt(4, pessoa.getEndereco().getEnderecoid());
+            psPessoa.setInt(5, pessoa.getPessoaid());
+            psPessoa.executeUpdate();
 
         } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            
+            if (psPessoa != null) psPessoa.close();
+            if (conn != null) conn.close();
         }
-
-        return pessoa;    }
+    }
 
     
-    public PacienteRepository deletePessoa(int id) {
-        return null;
+    public void deletePessoa(int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = new ConnectionFactory().getConnection();
+            String query = "DELETE FROM pessoa WHERE id = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } finally {
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
+        }
     }
 
     

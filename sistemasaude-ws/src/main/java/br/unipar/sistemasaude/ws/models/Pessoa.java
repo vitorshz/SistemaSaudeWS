@@ -1,38 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.unipar.sistemasaude.ws.models;
 
-/**
- *
- * @author lucia
- */
+
 public abstract class Pessoa {
-    private int id;
+    private int pessoaid;
     private String nome;
     private String email;
     private String telefone;
     private int isActive;
+    private Endereco endereco;
 
-    public Pessoa(int id, String nome, String email, String telefone, int isActive) {
-        this.id = id;
+    public Pessoa(int pessoaid, String nome, String email, String telefone, int isActive, Endereco endereco) {
+        this.pessoaid = pessoaid;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.isActive = isActive;
+        this.endereco = endereco;
     }
+
+
 
     public Pessoa() {
     }
 
-    public int getId() {
-        return id;
+    public int getPessoaid() {
+        return pessoaid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPessoaid(int pessoaid) {
+        this.pessoaid = pessoaid;
     }
+    
+    
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
 
     public String getNome() {
         return nome;

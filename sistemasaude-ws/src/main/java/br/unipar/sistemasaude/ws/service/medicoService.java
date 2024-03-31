@@ -30,8 +30,8 @@ public class medicoService {
         return medicoRepository.update(updateDTO);
     }
 
-    public PacienteRepository delete(int id) {
+    public void delete(int id) throws SQLException {
         PacienteRepository medicoRepository = new PacienteRepository();
-        return medicoRepository.delete(id);
+        medicoRepository.delete(id);
     }
 }
