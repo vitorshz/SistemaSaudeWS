@@ -16,12 +16,74 @@ import br.unipar.sistemasaude.ws.models.Medico;
 public class MedicoRepository {
      public MedicoRepository() {
     }
-    public ArrayList<Medico> listAll(){
-        return null;
+    public ArrayList<Medico> listAll() throws SQLException {
+        ArrayList<Medico> medicos = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = new ConnectionFactory().getConnection();
+            String query = "SELECT * FROM MEDICO";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Medico medico = new Medico(
+                    rs.getInt("MEDICOID"),
+                    rs.getInt("CRM"),
+                    rs.getString("ESPECIALIZACAO"),
+                    rs.getInt("ID"),
+                    rs.getString("NOME"),
+                    rs.getString("EMAIL"),
+                    rs.getString("TELEFONE"),
+                    rs.getInt("ISACTIVE"),
+                    null // Endereco não está sendo recuperado neste exemplo
+                );
+                medicos.add(medico);
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
+        }
+        
+        return medicos;
     }
     
-    public Medico findById(int id){
-        return null;
+    public Medico findById(int id) throws SQLException {
+        Medico medico = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = new ConnectionFactory().getConnection();
+            String query = "SELECT * FROM MEDICO WHERE ID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                medico = new Medico(
+                    rs.getInt("MEDICOID"),
+                    rs.getInt("CRM"),
+                    rs.getString("ESPECIALIZACAO"),
+                    rs.getInt("ID"),
+                    rs.getString("NOME"),
+                    rs.getString("EMAIL"),
+                    rs.getString("TELEFONE"),
+                    rs.getInt("ISACTIVE"),
+                    null // Endereco não está sendo recuperado neste exemplo
+                );
+            }
+        } finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
+        }
+        
+        return medico;
     }
 
     public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException, EspecialidadeException {

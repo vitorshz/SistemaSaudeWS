@@ -1,5 +1,4 @@
 package br.unipar.sistemasaude.ws.repository;
-import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Endereco;
 import java.sql.Connection;

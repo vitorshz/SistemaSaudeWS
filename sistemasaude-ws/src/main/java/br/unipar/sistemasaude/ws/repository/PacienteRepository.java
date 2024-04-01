@@ -2,24 +2,22 @@ package br.unipar.sistemasaude.ws.repository;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Endereco;
 import br.unipar.sistemasaude.ws.models.Paciente;
-import br.unipar.sistemasaude.ws.models.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
 public class PacienteRepository {
     
-    private EnderecoRepository enderecoRepository;
-    private PessoaRepository pessoaRepository;
-
+    private final EnderecoRepository enderecoRepository;
+    private final PessoaRepository pessoaRepository;
     public PacienteRepository() {
         this.enderecoRepository = new EnderecoRepository();
-        this.pessoaRepository = new PessoaRepository();
-    }
+        this.pessoaRepository = new PessoaRepository();   
+     }
+ 
 
     public ArrayList<Paciente> listAll() throws SQLException {
         ArrayList<Paciente> pacientes = new ArrayList<>();

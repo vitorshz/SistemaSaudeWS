@@ -6,7 +6,6 @@ import br.unipar.sistemasaude.ws.models.Endereco;
 import br.unipar.sistemasaude.ws.service.EnderecoService;
 import jakarta.jws.WebService;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 @WebService(endpointInterface="br.unipar.sistemasaude.ws.interfaces.EnderecoInterface")

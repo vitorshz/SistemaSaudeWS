@@ -4,7 +4,6 @@ import br.unipar.sistemasaude.ws.models.Endereco;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 @WebService

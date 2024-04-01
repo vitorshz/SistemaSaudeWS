@@ -11,12 +11,12 @@ import br.unipar.sistemasaude.ws.repository.MedicoRepository;
 import br.unipar.sistemasaude.ws.repository.PacienteRepository;
 
 public class medicoService {
-     public ArrayList<Medico> listAll() {
+     public ArrayList<Medico> listAll() throws SQLException {
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.listAll();
     }
    
-    public Medico findById(int id){
+    public Medico findById(int id) throws SQLException{
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.findById(id);
     }
@@ -31,6 +31,7 @@ public class medicoService {
     }
 
     public void delete(int id) throws SQLException {
+        
         PacienteRepository medicoRepository = new PacienteRepository();
         medicoRepository.delete(id);
     }

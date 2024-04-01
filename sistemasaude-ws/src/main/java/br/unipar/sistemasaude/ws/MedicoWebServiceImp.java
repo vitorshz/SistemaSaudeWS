@@ -36,13 +36,13 @@ public class MedicoWebServiceImp implements MedicoInterface{
     }
 
     @Override
-    public ArrayList<Medico> listAllMedico() {
+    public ArrayList<Medico> listAllMedico() throws SQLException {
         medicoService medicoService = new medicoService();
         return medicoService.listAll();
     }
 
     @Override
-    public Medico findByIdMedico(int id) {
+    public Medico findByIdMedico(int id) throws SQLException {
         medicoService medicoService = new medicoService();
         Medico medico = medicoService.findById(id);
         return medico;

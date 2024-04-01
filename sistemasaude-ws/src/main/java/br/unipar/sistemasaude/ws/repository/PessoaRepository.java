@@ -11,18 +11,78 @@ import java.util.ArrayList;
 
 
 public class PessoaRepository {
-    private EnderecoRepository enderecorepository;
+    private final EnderecoRepository enderecorepository;
     
     public PessoaRepository() {
         enderecorepository = new EnderecoRepository();
     }
     
-    public ArrayList<Pessoa> findPessoa(String nome) {
-        return null;
+    public ArrayList<Pessoa> findPessoa(String nome) throws SQLException {
+        // Implementação para encontrar pessoa por nome
+        ArrayList<Pessoa> pessoasEncontradas = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+    
+        try {
+            conn = new ConnectionFactory().getConnection();
+            
+            String query = "SELECT * FROM Pessoa WHERE NOME LIKE ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + nome + "%");
+    
+            rs = ps.executeQuery();
+    
+            // Você pode percorrer o ResultSet aqui para obter as pessoas encontradas
+            // e adicionar à lista de pessoasEncontradas
+    
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
-
-    public ArrayList<Pessoa> listAllPessoas() {
-        return null;
+        
+        // Retorna a lista de pessoas encontradas (pode ser vazia se nenhuma pessoa for encontrada)
+        return pessoasEncontradas;
+    }
+    public ArrayList<Pessoa> listAllPessoas() throws SQLException {
+        // Implementação para listar todas as pessoas
+        ArrayList<Pessoa> todasPessoas = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+    
+        try {
+            conn = new ConnectionFactory().getConnection();
+            
+            String query = "SELECT * FROM Pessoa";
+            ps = conn.prepareStatement(query);
+    
+            rs = ps.executeQuery();
+    
+            // Você pode percorrer o ResultSet aqui para obter todas as pessoas
+            // e adicionar à lista todasPessoas
+    
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        
+        // Retorna a lista contendo todas as pessoas (pode ser vazia se não houver nenhuma pessoa)
+        return todasPessoas;
     }
 
     public Pessoa insertPessoa(Pessoa pessoa) throws SQLException {
