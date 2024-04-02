@@ -26,4 +26,5 @@ public interface ConsultaInterface {
     Consulta findConsultaByMedicoId(Medico medico,LocalDateTime datahora) throws SQLException,ValidationException,DontExistsMedicoError;
     @WebMethod
     Consulta findCOnsultaByPacienteId(Paciente paciente,LocalDateTime datahora) throws SQLException,ValidationException,DontExistsPacienteError;
+    
 }
