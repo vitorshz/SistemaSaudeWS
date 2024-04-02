@@ -1,6 +1,11 @@
 package br.unipar.sistemasaude.ws.repository;
 
+import java.time.LocalDateTime;
+
+import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.models.Consulta;
+import br.unipar.sistemasaude.ws.models.Medico;
+import br.unipar.sistemasaude.ws.models.Paciente;
 
 public class ConsultaRepository{
     
@@ -8,20 +13,17 @@ public class ConsultaRepository{
     }
 
 
-    public Consulta inserirConsulta( ){
-      // TODO Auto-generated method stub
+    public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest ){
       throw new UnsupportedOperationException("Unimplemented method 'inserirConsulta'");
     }
-    public void deletarConsulta()
-         {
-        // TODO Auto-generated method stub
+    public void deletarConsulta(Consulta consulta) {
         throw new UnsupportedOperationException("Unimplemented method 'deletarConsulta'");
     }
-    public Consulta findConsultaByMedicoId(){
+    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora){
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findConsultaByMedicoId'");
     }
-    public Consulta findCOnsultaByPacienteId(){
+    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora){
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
     }

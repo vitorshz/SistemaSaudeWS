@@ -13,6 +13,7 @@ import br.unipar.sistemasaude.ws.interfaces.ConsultaInterface;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.models.Paciente;
+import br.unipar.sistemasaude.ws.service.ConsultaService;
 import jakarta.jws.WebService;
 import jakarta.validation.ValidationException;
 
@@ -21,29 +22,27 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
 
     @Override
     public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException, validacaoError {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inserirConsulta'");
+       ConsultaService consultaService = new ConsultaService();
+       return consultaService.insert(consultaRequest);
     }
 
     @Override
-    public void deletarConsulta(Consulta consulta)
-            throws SQLException, DontExistsConsultaError, ConsultaNaoPodeSerCanceladaError {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarConsulta'");
+    public void deletarConsulta(Consulta consulta){
+        ConsultaService consultaService = new ConsultaService();
+         consultaService.delete(consulta);
+    }
+    
+
+    @Override
+    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora){
+    ConsultaService consultaService = new ConsultaService();
+    return consultaService.findConsultaByMedicoId(medico,datahora);
     }
 
     @Override
-    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora)
-            throws SQLException, ValidationException, DontExistsMedicoError {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findConsultaByMedicoId'");
-    }
-
-    @Override
-    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora)
-            throws SQLException, ValidationException, DontExistsPacienteError {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
+    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora){
+        ConsultaService consultaService = new ConsultaService();
+        return consultaService.findCOnsultaByPacienteId(paciente, datahora);
     }
     
 }
