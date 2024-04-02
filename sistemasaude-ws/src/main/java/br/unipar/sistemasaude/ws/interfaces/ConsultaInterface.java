@@ -21,7 +21,7 @@ public interface ConsultaInterface {
     @WebMethod
     Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException,validacaoError;
     @WebMethod
-    void deletarConsulta(Consulta consulta) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError;
+    void deletarConsulta(Consulta consulta) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError, Exception;
     @WebMethod
     Consulta findConsultaByMedicoId(Medico medico,LocalDateTime datahora) throws SQLException,ValidationException,DontExistsMedicoError;
     @WebMethod

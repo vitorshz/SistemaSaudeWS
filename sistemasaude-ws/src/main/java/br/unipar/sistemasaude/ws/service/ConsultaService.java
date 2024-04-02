@@ -16,7 +16,7 @@ public class ConsultaService {
       ConsultaRepository consultaRepository = new ConsultaRepository();
       return consultaRepository.inserirConsulta(consultaRequest);
     }
-    public void delete(Consulta consulta){
+    public void delete(Consulta consulta) throws Exception{
         ConsultaRepository consultaRepository = new ConsultaRepository();
      consultaRepository.deletarConsulta(consulta);
     }

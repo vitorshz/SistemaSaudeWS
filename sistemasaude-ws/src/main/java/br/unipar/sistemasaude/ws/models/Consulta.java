@@ -22,6 +22,11 @@ public class Consulta {
     }
     
 
+    public Consulta() {
+        //TODO Auto-generated constructor stub
+    }
+
+
     public int getId() {
         return id;
     }
@@ -68,6 +73,12 @@ public class Consulta {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+
+    public void setMotivoCancelamento(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setMotivoCancelamento'");
     }
     
     
