@@ -2,6 +2,10 @@
 
 # requisitos de funcionaidade
 
+# bosin sistema saude ws
+
+# requisitos de funcionaidade
+
 - [ ]  Deve ser possivel cadastrar um medico;
 - [ ]  deve ser possivel listar os medicos cadastrados;
 - [ ]  deve ser possivel atualizar um medico por id;
@@ -41,6 +45,26 @@
 
 ![Database ER diagram (crow's foot).png](bosin%20sistema%20saude%20ws%20e0e7b425704047a0b431b5475e18182d/Database_ER_diagram_(crows_foot).png)
 
+### pessoa
+
+- id : int;
+- nome : string;
+- email: string;
+- telefone: string;
+- pacienteid: int?;
+- medicoid:int?;
+- enderecoid:int?;
+
+### medico
+
+- id: int;
+- crm:string;
+- especializacao : [”Ortopedia”,”cardiologia”, ”ginecologia”, ”dermatologia”]
+- pessoaid: int?;
+
+# banco de dados
+
+![drawSQL-image-export-2024-03-29.png](bosin%20sistema%20saude%20ws%20e0e7b425704047a0b431b5475e18182d/drawSQL-image-export-2024-03-29.png)
 ### pessoa
 
 - id : int;
