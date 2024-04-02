@@ -31,8 +31,6 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
         ConsultaService consultaService = new ConsultaService();
          consultaService.delete(consulta);
     }
-    
-
     @Override
     public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora){
     ConsultaService consultaService = new ConsultaService();
