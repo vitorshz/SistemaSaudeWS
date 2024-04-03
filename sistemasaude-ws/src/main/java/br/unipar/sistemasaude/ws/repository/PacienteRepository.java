@@ -119,7 +119,7 @@ public class PacienteRepository {
                 paciente.setPacienteid(rsPaciente.getInt(1)); 
             } else {
                 throw new SQLException("Falha ao inserir o paciente na tabela paciente.");
-            }
+                }
             }
             
         } finally {
