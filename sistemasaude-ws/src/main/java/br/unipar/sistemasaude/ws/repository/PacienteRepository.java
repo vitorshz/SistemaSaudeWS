@@ -54,46 +54,37 @@ public class PacienteRepository {
         return pacientes;
     }
     
-    public Paciente findById(int id) throws SQLException {
+    public Paciente findById(int pacienteId) throws SQLException {
         Connection conn = null;
-        PreparedStatement psPaciente = null;
-        ResultSet rsPaciente = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Paciente paciente = null;
 
         try {
             conn = new ConnectionFactory().getConnection();
-            String query = "SELECT p.pacienteid, p.cpf, pe.nome, pe.email, pe.telefone, pe.enderecoid, pe.isActive " +
+            String query = "SELECT p.cpf, p.pessoaid, pe.nome, pe.isActive " +
                            "FROM paciente p " +
-                           "INNER JOIN pessoa pe ON p.pessoaid = pe.pessoaid " +
-                           "WHERE p.pacienteid = ?";
-            psPaciente = conn.prepareStatement(query);
-            psPaciente.setInt(1, id);
-            rsPaciente = psPaciente.executeQuery();
+                           "INNER JOIN pessoa pe ON p.pessoaid = pe.id " +
+                           "WHERE p.id = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pacienteId);
+            rs = ps.executeQuery();
 
-            if (rsPaciente.next()) {
-                // Recupera os dados do paciente e cria uma instância de Paciente
-                Paciente paciente = new Paciente();
-                paciente.setPacienteid(rsPaciente.getInt("pacienteid"));
-                paciente.setCpf(rsPaciente.getString("cpf"));
-                paciente.setNome(rsPaciente.getString("nome"));
-                paciente.setEmail(rsPaciente.getString("email"));
-                paciente.setTelefone(rsPaciente.getString("telefone"));
-
-                // Recupera o endereço do paciente e define no objeto Paciente
-                Endereco endereco = new Endereco();
-                endereco.setEnderecoid(rsPaciente.getInt("enderecoid"));
-                paciente.setEndereco(endereco);
-
-                // Retorna o objeto Paciente
-                return paciente;
-            } else {
-                return null; // Retorna null se o paciente não for encontrado
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setPacienteid(pacienteId);
+                paciente.setCpf(rs.getString("cpf"));
+                paciente.setPessoaid(rs.getInt("pessoaid"));
+                paciente.setNome(rs.getString("nome"));
+                paciente.setIsActive(rs.getInt("isActive"));
             }
         } finally {
-            // Fecha os recursos
-            if (rsPaciente != null) rsPaciente.close();
-            if (psPaciente != null) psPaciente.close();
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
             if (conn != null) conn.close();
         }
+
+        return paciente;
     }
 
     public Paciente insert(Paciente paciente) throws SQLException {
