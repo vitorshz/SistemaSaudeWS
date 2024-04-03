@@ -167,7 +167,7 @@ public class PacienteRepository {
         try {
             conn = new ConnectionFactory().getConnection();
             
-            String query = "UPDATE paciente SET isActive = 0 WHERE pacienteid = ?";
+            String query = "UPDATE pessoa SET isActive = 0 WHERE id = (SELECT pessoaid FROM paciente WHERE id = ?)";
             psPaciente = conn.prepareStatement(query);
             psPaciente.setInt(1, pacienteId);
             psPaciente.executeUpdate();
