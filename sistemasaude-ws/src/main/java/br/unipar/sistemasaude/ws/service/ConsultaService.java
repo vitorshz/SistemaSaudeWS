@@ -1,5 +1,6 @@
 package br.unipar.sistemasaude.ws.service;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
@@ -12,7 +13,7 @@ public class ConsultaService {
     public ConsultaService() {
 
     }
-    public Consulta insert(InsertConsultaRequestDTO consultaRequest){
+    public Consulta insert(InsertConsultaRequestDTO consultaRequest) throws SQLException{
       ConsultaRepository consultaRepository = new ConsultaRepository();
       return consultaRepository.inserirConsulta(consultaRequest);
     }
