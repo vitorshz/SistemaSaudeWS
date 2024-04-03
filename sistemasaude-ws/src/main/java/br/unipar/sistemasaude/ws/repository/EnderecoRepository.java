@@ -17,8 +17,8 @@ public class EnderecoRepository {
     public Endereco insert(Endereco endereco) throws SQLException {
         
         String query = 
-                "INSERT INTO ENDERECO (LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO)"
-                + "VALUES(?, ?, ?, ?);";
+                "INSERT INTO ENDERECO (LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, UF, CEP) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         Connection conn = null;
         PreparedStatement ps = null;
@@ -34,6 +34,9 @@ public class EnderecoRepository {
             ps.setInt(2, endereco.getNumero());
             ps.setString(3, endereco.getComplemento());
             ps.setString(4,endereco.getBairro());
+            ps.setString(5, endereco.getCidade());
+            ps.setString(6, endereco.getUF());
+            ps.setString(7, endereco.getCEP());
 
             ps.executeUpdate();
             
@@ -73,6 +76,10 @@ public class EnderecoRepository {
                 endereco.setBairro(rsEndereco.getString("bairro"));
                 endereco.setComplemento(rsEndereco.getString("complemento"));
                 endereco.setNumero(rsEndereco.getInt("numero"));
+                endereco.setCidade(rsEndereco.getString("cidade"));
+                endereco.setUF(rsEndereco.getString("UF"));
+                endereco.setCEP(rsEndereco.getString("CEP"));
+                
                 return endereco;
             } else {
                 return null; 

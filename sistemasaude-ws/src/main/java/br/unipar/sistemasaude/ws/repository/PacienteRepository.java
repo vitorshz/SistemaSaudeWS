@@ -31,7 +31,7 @@ public class PacienteRepository {
             String query = "SELECT p.cpf, p.pessoaid, p.id, pe.nome, pe.isActive " +
                        "FROM paciente p " +
                        "INNER JOIN pessoa pe ON p.pessoaid = pe.id " +
-                       "ORDER BY pe.nome";
+                       "ORDER BY pe.nome ASC";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
 
