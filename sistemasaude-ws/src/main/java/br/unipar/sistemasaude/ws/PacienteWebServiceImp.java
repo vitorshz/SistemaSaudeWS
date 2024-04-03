@@ -20,7 +20,8 @@ public class PacienteWebServiceImp implements PacienteInterface{
 
     @Override
     public Paciente findByIdPaciente(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        PacienteService pacienteService = new PacienteService();
+        return pacienteService.findById(id);
     }
 
     @Override

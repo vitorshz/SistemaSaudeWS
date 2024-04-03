@@ -2,6 +2,7 @@ package br.unipar.sistemasaude.ws.repository;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Endereco;
 import br.unipar.sistemasaude.ws.models.Paciente;
+import br.unipar.sistemasaude.ws.models.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 
 public class PacienteRepository {
     
-    private final EnderecoRepository enderecoRepository;
-    private final PessoaRepository pessoaRepository;
+    private EnderecoRepository enderecoRepository;
+    private PessoaRepository pessoaRepository;
     public PacienteRepository() {
         this.enderecoRepository = new EnderecoRepository();
         this.pessoaRepository = new PessoaRepository();   
@@ -27,7 +28,10 @@ public class PacienteRepository {
 
         try {
             conn = new ConnectionFactory().getConnection();
-            String query = "SELECT * FROM paciente";
+            String query = "SELECT p.cpf, p.pessoaid, p.id, pe.nome, pe.isActive " +
+                       "FROM paciente p " +
+                       "INNER JOIN pessoa pe ON p.pessoaid = pe.id " +
+                       "ORDER BY pe.nome";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
 
@@ -35,7 +39,9 @@ public class PacienteRepository {
                 Paciente paciente = new Paciente();
                 paciente.setCpf(rs.getString("cpf"));
                 paciente.setPessoaid(rs.getInt("pessoaid"));
-                
+                paciente.setPacienteid(rs.getInt("id"));
+                paciente.setNome(rs.getString("nome"));
+                paciente.setIsActive(rs.getInt("isactive"));
 
                 pacientes.add(paciente);
             }
@@ -103,11 +109,17 @@ public class PacienteRepository {
             
             PessoaRepository pessoaRepository = new PessoaRepository();
             paciente.setEndereco(enderecoInserido); 
-            pessoaRepository.insertPessoa(paciente);
+            Pessoa p = pessoaRepository.insertPessoa(paciente);
+            
+            
+            if(p!=null){
+             
+             // Define o ID da pessoa inserida no paciente
+            paciente.setPessoaid(p.getPessoaid());    
             
             String queryPaciente = "INSERT INTO paciente (pessoaid, cpf) VALUES (?, ?)";
             psPaciente = conn.prepareStatement(queryPaciente, PreparedStatement.RETURN_GENERATED_KEYS);
-            psPaciente.setInt(1, paciente.getPacienteid()); 
+            psPaciente.setInt(1, paciente.getPessoaid()); 
             psPaciente.setString(2, paciente.getCpf());
             psPaciente.executeUpdate();
 
@@ -117,6 +129,8 @@ public class PacienteRepository {
             } else {
                 throw new SQLException("Falha ao inserir o paciente na tabela paciente.");
             }
+            }
+            
         } finally {
             
             if (rsPaciente != null) rsPaciente.close();
