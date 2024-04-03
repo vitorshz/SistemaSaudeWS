@@ -12,7 +12,9 @@ import jakarta.resource.cci.ResultSet;
 import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 public class ConsultaRepository {
 
@@ -25,8 +27,40 @@ public class ConsultaRepository {
 
     }
 
-    public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) {
-        return null;
+    public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String queryInsert = "";
+        Consulta consultacreated = new Consulta();
+        try {
+            conn = new ConnectionFactory().getConnection();
+            Random ramdom = new Random();
+            ps = conn.prepareStatement(queryInsert);
+            ps.setInt(1, ramdom.nextInt());
+            ps.setInt(2, consultaRequest.getPacienteid());
+            ps.setInt(3, consultaRequest.getMedicoid());
+            ps.setTimestamp(3, Timestamp.valueOf(consultaRequest.getDatahora().toString()));
+            ps.setInt(4,1);
+            ResultSet rs = (ResultSet) ps.executeQuery();
+            
+            while (rs.next()) {
+                consultacreated.setId(rs.getInt("id"));
+                consultacreated.setMedicoid(rs.getInt("medicoid"));
+                consultacreated.setPacienteid(rs.getInt("pacienteid"));
+                Timestamp timestamp = rs.getTimestamp("datahora");
+                LocalDateTime localDateTime = timestamp.toLocalDateTime();
+                consultacreated.setDatahora(localDateTime);
+                consultacreated.setIsActive(rs.getInt("isactive"));
+                consultacreated.setMotivoCancelamento(rs.getString("motivocancelamento"));
+            }
+
+        }finally{
+            if (ps != null)
+            ps.close();
+        if (conn != null)
+            conn.close();
+        }
+        return consultacreated;
     }
 
     public void deletarConsulta(Consulta consulta) throws Exception {
