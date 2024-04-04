@@ -1,6 +1,7 @@
 package br.unipar.sistemasaude.ws;
 
 
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.interfaces.EnderecoInterface;
 import br.unipar.sistemasaude.ws.models.Endereco;
 import br.unipar.sistemasaude.ws.service.EnderecoService;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 public class EnderecoWebServiceImp implements EnderecoInterface{
 
     @Override
-    public Endereco insertEndereco(Endereco endereco) throws SQLException {
+    public Endereco insertEndereco(Endereco endereco) throws SQLException, validacaoError {
         EnderecoService enderecoService = new EnderecoService();
         return enderecoService.insert(endereco);
     
@@ -20,18 +21,21 @@ public class EnderecoWebServiceImp implements EnderecoInterface{
 
     @Override
     public Endereco getEnderecoById(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EnderecoService enderecoService = new EnderecoService();
+        return enderecoService.findById(id);
     }
 
 
     @Override
-    public Endereco updateEndereco(Endereco enndereco) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void updateEndereco(Endereco endereco) throws SQLException {
+        EnderecoService enderecoService = new EnderecoService();
+        enderecoService.atualizar(endereco);
     }
 
     @Override
     public void deleteEnderecoById(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EnderecoService enderecoService = new EnderecoService();
+        enderecoService.delete(id);
     }
 
     

@@ -1,5 +1,6 @@
 package br.unipar.sistemasaude.ws;
 
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.interfaces.PacienteInterface;
 import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.service.PacienteService;
@@ -20,11 +21,12 @@ public class PacienteWebServiceImp implements PacienteInterface{
 
     @Override
     public Paciente findByIdPaciente(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        PacienteService pacienteService = new PacienteService();
+        return pacienteService.findById(id);
     }
 
     @Override
-    public Paciente inserirPaciente(Paciente paciente) throws SQLException {
+    public Paciente inserirPaciente(Paciente paciente) throws SQLException,validacaoError {
         PacienteService pacienteService = new PacienteService();
         return pacienteService.insert(paciente);
     }

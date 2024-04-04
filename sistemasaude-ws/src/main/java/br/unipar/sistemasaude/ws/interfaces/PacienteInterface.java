@@ -1,5 +1,6 @@
 package br.unipar.sistemasaude.ws.interfaces;
 
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ public interface PacienteInterface {
     Paciente findByIdPaciente(int id) throws SQLException;
     
     @WebMethod
-    Paciente inserirPaciente(Paciente paciente) throws SQLException;
+    Paciente inserirPaciente(Paciente paciente) throws SQLException, validacaoError;
     
     @WebMethod
     void atualizarPaciente(Paciente paciente) throws SQLException, Exception;
