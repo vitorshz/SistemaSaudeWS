@@ -19,7 +19,7 @@ import jakarta.validation.ValidationException;
 @WebService
 public interface ConsultaInterface {
     @WebMethod
-    Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException,validacaoError;
+    Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException,validacaoError, Exception;
     @WebMethod
     void deletarConsulta(Consulta consulta) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError, Exception;
     @WebMethod

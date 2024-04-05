@@ -8,15 +8,17 @@ public class Consulta {
     private int id;
     private int pacienteid;
     private int medicoid;
+    private int duracaoemminutos = 60;
     private LocalDateTime datahora;
     private MotivoCancelamentosEnum motivoCancelamento;
     private int isActive;
 
-    public Consulta(int id, int pacienteid, int medicoid, LocalDateTime datahora, MotivoCancelamentosEnum motivoCancelamento, int isActive) {
+    public Consulta(int id, int pacienteid, int medicoid, LocalDateTime datahora, MotivoCancelamentosEnum motivoCancelamento, int isActive,int duracaoemminutos) {
         this.id = id;
         this.pacienteid = pacienteid;
         this.medicoid = medicoid;
         this.datahora = datahora;
+        this.duracaoemminutos = duracaoemminutos;
         this.motivoCancelamento = motivoCancelamento;
         this.isActive = isActive;
     }

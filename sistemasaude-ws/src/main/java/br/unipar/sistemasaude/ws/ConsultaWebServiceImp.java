@@ -1,10 +1,8 @@
 package br.unipar.sistemasaude.ws;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
-import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.interfaces.ConsultaInterface;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import br.unipar.sistemasaude.ws.models.Medico;
@@ -16,7 +14,7 @@ import jakarta.jws.WebService;
 public class ConsultaWebServiceImp implements ConsultaInterface{
 
     @Override
-    public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException, validacaoError {
+    public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws Exception {
        ConsultaService consultaService = new ConsultaService();
        return consultaService.insert(consultaRequest);
     }

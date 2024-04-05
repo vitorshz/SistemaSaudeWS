@@ -13,19 +13,34 @@ public class ConsultaService {
     public ConsultaService() {
 
     }
-    public Consulta insert(InsertConsultaRequestDTO consultaRequest) throws SQLException{
-      ConsultaRepository consultaRepository = new ConsultaRepository();
-      return consultaRepository.inserirConsulta(consultaRequest);
-    }
-    public void delete(Consulta consulta) throws Exception{
+
+    public Consulta insert(InsertConsultaRequestDTO consultaRequest) throws Exception {
         ConsultaRepository consultaRepository = new ConsultaRepository();
-     consultaRepository.deletarConsulta(consulta);
+        LocalDateTime localNow = LocalDateTime.now();
+        if (consultaRequest.getDatahora().isBefore(localNow)) {
+            throw new Exception("A Data já passou");
+        }
+        
+        try {
+            return consultaRepository.inserirConsulta(consultaRequest);
+        } catch (SQLException ex) {
+
+            System.err.println("Erro SQL ao inserir consulta: " + ex.getMessage());
+            throw ex;
+        }
     }
-    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora){
+
+    public void delete(Consulta consulta) throws Exception {
+        ConsultaRepository consultaRepository = new ConsultaRepository();
+        consultaRepository.deletarConsulta(consulta);
+    }
+
+    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora) {
         ConsultaRepository consultaRepository = new ConsultaRepository();
         return consultaRepository.findConsultaByMedicoId(medico, datahora);
     }
-    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora){
+
+    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora) {
         ConsultaRepository consultaRepository = new ConsultaRepository();
         return consultaRepository.findCOnsultaByPacienteId(paciente, datahora);
     }
