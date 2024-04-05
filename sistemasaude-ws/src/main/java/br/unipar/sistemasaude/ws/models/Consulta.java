@@ -23,7 +23,7 @@ public class Consulta {
     
 
     public Consulta() {
-        //TODO Auto-generated constructor stub
+     
     }
 
 
@@ -77,7 +77,7 @@ public class Consulta {
 
 
     public void setMotivoCancelamento(String string) {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'setMotivoCancelamento'");
     }
     

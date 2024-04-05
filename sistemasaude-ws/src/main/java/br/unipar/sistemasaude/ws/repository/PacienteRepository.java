@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 public class PacienteRepository {
     
+    @SuppressWarnings("unused")
     private EnderecoRepository enderecoRepository;
+    @SuppressWarnings("unused")
     private PessoaRepository pessoaRepository;
     public PacienteRepository() {
         this.enderecoRepository = new EnderecoRepository();

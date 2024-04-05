@@ -18,7 +18,9 @@ import java.util.Random;
 
 public class ConsultaRepository {
 
+    @SuppressWarnings("unused")
     private final PacienteRepository pacienteRepository;
+    @SuppressWarnings("unused")
     private final MedicoRepository medicoRepository;
 
     public ConsultaRepository() {
@@ -119,12 +121,12 @@ public class ConsultaRepository {
     }
 
     public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora) {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'findConsultaByMedicoId'");
     }
 
     public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora) {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
     }
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 
 public class PessoaRepository {
+    @SuppressWarnings("unused")
     private final EnderecoRepository enderecorepository;
     
     public PessoaRepository() {
