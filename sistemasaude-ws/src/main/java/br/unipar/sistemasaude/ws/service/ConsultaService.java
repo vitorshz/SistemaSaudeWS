@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
+import br.unipar.sistemasaude.ws.errors.NaoPermitirAgendamentoAntecedenciatrintaminutoserror;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.models.Paciente;
@@ -16,15 +17,16 @@ public class ConsultaService {
 
     public Consulta insert(InsertConsultaRequestDTO consultaRequest) throws Exception {
         ConsultaRepository consultaRepository = new ConsultaRepository();
-        LocalDateTime localNow = LocalDateTime.now();
-        if (consultaRequest.getDatahora().isBefore(localNow)) {
-            throw new Exception("A Data já passou");
+        LocalDateTime localAgora = LocalDateTime.now();
+        LocalDateTime dataHoraMinima = localAgora.plusMinutes(30);
+    
+        if (consultaRequest.getDatahora().isBefore(dataHoraMinima)) {
+            throw new NaoPermitirAgendamentoAntecedenciatrintaminutoserror();
         }
-        
+    
         try {
             return consultaRepository.inserirConsulta(consultaRequest);
         } catch (SQLException ex) {
-
             System.err.println("Erro SQL ao inserir consulta: " + ex.getMessage());
             throw ex;
         }

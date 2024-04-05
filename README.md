@@ -24,7 +24,7 @@
 - [ ]  não é permitido alterar o e-mail e o cpf do paciente;
 - [ ]  a listagem de paciente devem ser ordenada por ordem crescente pelo nome do paciente;
 - [x]  As consultas tem duração fixa de 1 hora;
-- [ ]  As consultas devem ser agendadas com antecedência mínima de 30 minutos;
+- [x]  As consultas devem ser agendadas com antecedência mínima de 30 minutos;
 - [ ]  Não permitir o agendamento de consultas com pacientes inativos no sistema;
 - [ ]  Não permitir o agendamento de consultas com médicos inativos no sistema;
 - [ ]  Não permitir o agendamento de mais de uma consulta no mesmo dia para um mesmo paciente;
