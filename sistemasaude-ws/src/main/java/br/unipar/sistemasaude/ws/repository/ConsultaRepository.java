@@ -6,7 +6,7 @@ import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.enuns.MotivoCancelamentosEnum;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Consulta;
-import jakarta.resource.cci.ResultSet;
+import java.sql.ResultSet;
 
 import java.sql.Timestamp;
 import java.sql.Connection;
@@ -32,16 +32,15 @@ public class ConsultaRepository {
     public Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
-        String queryInsert = "";
+        String queryInsert = "INSERT INTO CONSULTA(medicoid,pacienteid,datahora,isactive) values (?,?,?,?)";
         Consulta consultacreated = new Consulta();
         
         try {
             conn = new ConnectionFactory().getConnection();
-            Random ramdom = new Random();
+     
             ps = conn.prepareStatement(queryInsert);
-            ps.setInt(1, ramdom.nextInt());
+            ps.setInt(1, consultaRequest.getMedicoid());
             ps.setInt(2, consultaRequest.getPacienteid());
-            ps.setInt(3, consultaRequest.getMedicoid());
             ps.setTimestamp(3, Timestamp.valueOf(consultaRequest.getDatahora()));
             ps.setInt(4,1);
             ResultSet rs = (ResultSet) ps.executeQuery();
