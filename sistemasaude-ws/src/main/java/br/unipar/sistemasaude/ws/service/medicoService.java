@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.models.Medico;
-import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.repository.MedicoRepository;
 
 public class medicoService {

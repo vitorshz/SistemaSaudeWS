@@ -3,6 +3,7 @@ package br.unipar.sistemasaude.ws.repository;
 import java.time.LocalDateTime;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
+import br.unipar.sistemasaude.ws.enuns.MotivoCancelamentosEnum;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import jakarta.resource.cci.ResultSet;
@@ -119,18 +120,93 @@ public class ConsultaRepository {
         }
     }
 
-    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) {
+    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ArrayList<Consulta> consultasQuery = new ArrayList<Consulta>();
+        String querySQL = "SELECT * FROM consulta WHERE medicoid == ?;";
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(querySQL);
+            ps.setInt(1, medicoId);
+            ResultSet rs = (ResultSet) ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int pacienteId = rs.getInt("pacienteid");
+                LocalDateTime dataHora = rs.getTimestamp("datahora").toLocalDateTime();
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.valueOf(rs.getString("motivoCancelamento"));
+                int isActive = rs.getInt("isActive");
+                int duracaoEmMinutos = rs.getInt("duracaoemminutos");
 
-        throw new UnsupportedOperationException("Unimplemented method 'findConsultaByMedicoId'");
+                Consulta consulta = new Consulta(id, pacienteId, medicoId, dataHora, motivoCancelamento, isActive, duracaoEmMinutos);
+                consultasQuery.add(consulta);
+            }
+            return consultasQuery;
+        }finally{
+            if (ps != null)
+            ps.close();
+        if (conn != null)
+            conn.close();
+        }
     }
 
-    public ArrayList<Consulta> findConsultaByPacienteId(int pacienteId) {
+    public ArrayList<Consulta> findConsultaByPacienteId(int pacienteId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ArrayList<Consulta> consultasQuery = new ArrayList<Consulta>();
+        String querySQL = "SELECT * FROM consulta WHERE pacienteid = ?;";
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(querySQL);
+            ps.setInt(1, pacienteId);
+            ResultSet rs = (ResultSet) ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                LocalDateTime dataHora = rs.getTimestamp("datahora").toLocalDateTime();
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.valueOf(rs.getString("motivoCancelamento"));
+                int isActive = rs.getInt("isActive");
+                int duracaoEmMinutos = rs.getInt("duracaoemminutos");
 
-        throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
+                Consulta consulta = new Consulta(id, pacienteId, rs.getInt("medicoid"), dataHora, motivoCancelamento, isActive, duracaoEmMinutos);
+                consultasQuery.add(consulta);
+            }
+        } finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+        return consultasQuery;
     }
-    public ArrayList<Consulta> findConsultaByDataHora(LocalDateTime datahora) {
+    public ArrayList<Consulta> findConsultaByDataHora(LocalDateTime datahora) throws SQLException {
 
-        throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ArrayList<Consulta> consultasQuery = new ArrayList<Consulta>();
+        String querySQL = "SELECT * FROM consulta WHERE datahora = ?;";
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(querySQL);
+            ps.setTimestamp(1, java.sql.Timestamp.valueOf(datahora));
+            ResultSet rs = (ResultSet) ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int pacienteId = rs.getInt("pacienteid");
+                int medicoId = rs.getInt("medicoid");
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.valueOf(rs.getString("motivoCancelamento"));
+                int isActive = rs.getInt("isActive");
+                int duracaoEmMinutos = rs.getInt("duracaoemminutos");
+
+                Consulta consulta = new Consulta(id, pacienteId, medicoId, datahora, motivoCancelamento, isActive, duracaoEmMinutos);
+                consultasQuery.add(consulta);
+            }
+        } finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+        return consultasQuery;
     }
 
 }

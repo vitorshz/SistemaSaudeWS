@@ -106,12 +106,12 @@ public class ConsultaService {
         }
     }
 
-    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) {
+    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) throws SQLException {
         ConsultaRepository consultaRepository = new ConsultaRepository();
         return consultaRepository.findConsultaByMedicoId(medicoId);
     }
 
-    public ArrayList<Consulta> findCOnsultaByPacienteId(int pacienteId) {
+    public ArrayList<Consulta> findCOnsultaByPacienteId(int pacienteId) throws SQLException {
         ConsultaRepository consultaRepository = new ConsultaRepository();
         return consultaRepository.findConsultaByPacienteId(pacienteId);
     }

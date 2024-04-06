@@ -1,6 +1,7 @@
 package br.unipar.sistemasaude.ws;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.interfaces.ConsultaInterface;
@@ -23,7 +24,7 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
          consultaService.delete(consulta);
     }
     @Override
-    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId){
+    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) throws SQLException{
     ConsultaService consultaService = new ConsultaService();
     return consultaService.findConsultaByMedicoId(medicoId);
     }
