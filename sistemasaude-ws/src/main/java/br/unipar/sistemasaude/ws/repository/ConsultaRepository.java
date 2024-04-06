@@ -128,5 +128,9 @@ public class ConsultaRepository {
 
         throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
     }
+    public ArrayList<Consulta> findConsultaByDataHora(LocalDateTime datahora) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
+    }
 
 }
