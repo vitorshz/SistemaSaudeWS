@@ -23,12 +23,12 @@ public interface MedicoInterface {
     Medico findByIdMedico(@WebParam int id) throws SQLException;
     
     @WebMethod
-    MedicoRequest inserirMedico(MedicoRequest medicoDto) throws SQLException,ValidationException, EspecialidadeException;
+    Medico inserirMedico(Medico medicoDto) throws SQLException,ValidationException, EspecialidadeException;
     
     @WebMethod
-    void atualizarMedico(MedicoUpdateRequestDTO medico) throws SQLException, Exception;
+    void atualizarMedico(Medico medico) throws SQLException, Exception;
     
     @WebMethod
-    void deletarMedico(int id);
+    void deletarMedico(int id)throws SQLException;
 
 }

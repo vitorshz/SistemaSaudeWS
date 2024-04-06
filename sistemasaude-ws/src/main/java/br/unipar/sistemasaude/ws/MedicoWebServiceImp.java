@@ -16,23 +16,24 @@ import jakarta.validation.ValidationException;
 
 @WebService(endpointInterface="br.unipar.sistemasaude.ws.interfaces.MedicoInterface")
 public class MedicoWebServiceImp implements MedicoInterface{
-
+    
 
     @Override
-    public MedicoRequest inserirMedico(MedicoRequest medicoDto) throws SQLException, ValidationException, EspecialidadeException {
+    public Medico inserirMedico(Medico medicoDto) throws SQLException, ValidationException, EspecialidadeException {
         medicoService medicoService = new medicoService();
         return medicoService.insert(medicoDto);
     }
     
     @Override
-    public void atualizarMedico(MedicoUpdateRequestDTO medico) throws SQLException, Exception {
+    public void atualizarMedico(Medico medico) throws SQLException, Exception {
         medicoService medicoService = new medicoService();
       medicoService.atualizar(medico);
     }
 
     @Override
-    public void deletarMedico(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void deletarMedico(int id) throws SQLException{
+        medicoService medicoService = new medicoService();
+      medicoService.delete(id);
     }
 
     @Override

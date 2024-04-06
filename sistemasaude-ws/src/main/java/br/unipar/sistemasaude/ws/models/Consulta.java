@@ -82,6 +82,14 @@ public class Consulta {
 
         throw new UnsupportedOperationException("Unimplemented method 'setMotivoCancelamento'");
     }
+
+    public int getDuracaoemminutos() {
+        return duracaoemminutos;
+    }
+
+    public void setDuracaoemminutos(int duracaoemminutos) {
+        this.duracaoemminutos = duracaoemminutos;
+    }
     
     
     }

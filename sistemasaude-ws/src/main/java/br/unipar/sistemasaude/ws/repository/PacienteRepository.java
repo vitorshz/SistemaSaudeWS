@@ -106,7 +106,7 @@ public class PacienteRepository {
             
             
             if(p!=null){
-             
+            
              // Define o ID da pessoa inserida no paciente
             paciente.setPessoaid(p.getPessoaid());    
             
