@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.models.Medico;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
@@ -21,7 +22,7 @@ public interface MedicoInterface {
     Medico findByIdMedico(@WebParam int id) throws SQLException;
     
     @WebMethod
-    Medico inserirMedico(Medico medicoDto) throws SQLException,ValidationException, EspecialidadeException;
+    Medico inserirMedico(Medico medicoDto) throws SQLException,ValidationException, EspecialidadeException,validacaoError;
     
     @WebMethod
     void atualizarMedico(Medico medico) throws SQLException, Exception;
