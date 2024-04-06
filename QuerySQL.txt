@@ -1,6 +1,7 @@
 CREATE TABLE endereco (
     id SERIAL PRIMARY KEY,
-    numero VARCHAR,
+    numero INTEGER,
+	logradouro VARCHAR(255),
     complemento VARCHAR(100),
     bairro VARCHAR(100) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
@@ -29,7 +30,7 @@ CREATE TABLE medico(
     id SERIAL PRIMARY KEY NOT NULL,
     pessoaid INT NOT NULL,
     crm VARCHAR(20) NOT NULL,
-    especialidade VARCHAR(100) NOT NULL,
+    especializacao VARCHAR(100) NOT NULL,
     FOREIGN KEY (pessoaid) REFERENCES pessoa(id)
 );
 
