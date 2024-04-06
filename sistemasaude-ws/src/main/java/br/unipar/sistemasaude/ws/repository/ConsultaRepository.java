@@ -34,6 +34,7 @@ public class ConsultaRepository {
         PreparedStatement ps = null;
         String queryInsert = "";
         Consulta consultacreated = new Consulta();
+        
         try {
             conn = new ConnectionFactory().getConnection();
             Random ramdom = new Random();

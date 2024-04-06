@@ -3,7 +3,8 @@ package br.unipar.sistemasaude.ws.interfaces;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
+import br.unipar.sistemasaude.ws.dto.InsertConsultaRequest;
+
 import br.unipar.sistemasaude.ws.errors.ConsultaNaoPodeSerCanceladaError;
 import br.unipar.sistemasaude.ws.errors.DontExistsConsultaError;
 import br.unipar.sistemasaude.ws.errors.DontExistsMedicoError;
@@ -17,7 +18,7 @@ import jakarta.validation.ValidationException;
 @WebService
 public interface ConsultaInterface {
     @WebMethod
-    Consulta inserirConsulta(InsertConsultaRequestDTO consultaRequest) throws SQLException,validacaoError, Exception;
+    Consulta inserirConsulta(InsertConsultaRequest consultaRequest) throws SQLException,validacaoError, Exception;
     @WebMethod
     void deletarConsulta(Consulta consulta) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError, Exception;
     @WebMethod
