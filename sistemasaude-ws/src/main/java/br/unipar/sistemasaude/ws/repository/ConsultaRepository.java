@@ -123,7 +123,7 @@ public class ConsultaRepository {
         Connection conn = null;
         PreparedStatement ps = null;
         ArrayList<Consulta> consultasQuery = new ArrayList<Consulta>();
-        String querySQL = "SELECT * FROM consulta WHERE medicoid == ?;";
+        String querySQL = "SELECT * FROM consulta WHERE medicoid = ?;";
         try {
             conn = new ConnectionFactory().getConnection();
             ps = conn.prepareStatement(querySQL);
@@ -197,7 +197,7 @@ public class ConsultaRepository {
                 int id = rs.getInt("id");
                 int pacienteId = rs.getInt("pacienteid");
                 int medicoId = rs.getInt("medicoid");
-                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.valueOf(rs.getString("motivoCancelamento"));
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.ESTAATIVO;
                 int isActive = rs.getInt("isActive");
                 int duracaoEmMinutos = rs.getInt("duracaoemminutos");
 

@@ -48,7 +48,7 @@ public class MedicoRepository {
                 medico.setNome(rs.getString("nome"));
                 medico.setEmail(rs.getString("email"));
                 medico.setTelefone(rs.getString("telefone"));
-                medico.setIsActive(rs.getInt("isActive"));
+                medico.setIsActive(rs.getInt("isactive"));
 
                 // Define o ID do endereço no médico
                 Endereco endereco = new Endereco();
@@ -74,7 +74,7 @@ public class MedicoRepository {
 
         try {
             conn = new ConnectionFactory().getConnection();
-            String query = "SELECT m.*, pe.nome, pe.email, pe.telefone, pe.isActive, pe.enderecoid " +
+            String query = "SELECT m.*, pe.nome, pe.email, pe.telefone, pe.isactive, pe.enderecoid " +
                            "FROM medico m " +
                            "INNER JOIN pessoa pe ON m.pessoaid = pe.id " +
                            "WHERE m.id = ?";
@@ -91,7 +91,7 @@ public class MedicoRepository {
                 medico.setNome(rs.getString("nome"));
                 medico.setEmail(rs.getString("email"));
                 medico.setTelefone(rs.getString("telefone"));
-                medico.setIsActive(rs.getInt("isActive"));
+                medico.setIsActive(rs.getInt("isactive"));
                 
                 // Define o ID do endereço no médico
                 Endereco endereco = new Endereco();

@@ -21,6 +21,7 @@ import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.repository.ConsultaRepository;
 import br.unipar.sistemasaude.ws.repository.MedicoRepository;
 import br.unipar.sistemasaude.ws.repository.PacienteRepository;
+import java.util.Random;
 
 public class ConsultaService {
     public ConsultaService() {
@@ -33,57 +34,66 @@ public class ConsultaService {
         MedicoRepository medicoRepository = new MedicoRepository();
         LocalDateTime localAgora = LocalDateTime.now();
         LocalDateTime dataHoraMinima = localAgora.plusMinutes(30);
-        Paciente pacineteIsActive = pacienteRepository.findById(consultaRequest.getPacienteid());
-        Medico medicoIsActive = medicoRepository.findById(consultaRequest.getMedicoid());
+        Paciente pacienteIsActive = pacienteRepository.findById(consultaRequest.getPacienteid());
+        Medico medicoIsActive = null; // iniciar como nulo
+
         ConsultaFiltrada consultaFiltrada = new ConsultaFiltrada();
 
-        ArrayList<Consulta> consultasDoPaciente = consultaRepository
-                .findConsultaByPacienteId(consultaRequest.getPacienteid());
+        ArrayList<Consulta> consultasDoPaciente = consultaRepository.findConsultaByPacienteId(consultaRequest.getPacienteid());
         List<Consulta> consultasProximasDoPaciente = consultaFiltrada.filtrarConsultasProximas(consultasDoPaciente);
-        ArrayList<Consulta> consultasDoMedico = consultaRepository
-                .findConsultaByMedicoId(consultaRequest.getMedicoid());
+
+        //só fazer a consulta do medico se forr informado o id do medico
+        ArrayList<Consulta> consultasDoMedico = new ArrayList<>();
+        Integer medicoid = consultaRequest.getMedicoid(); // converter para int
+        if (medicoid != null && medicoid != 0) {
+            consultasDoMedico = consultaRepository.findConsultaByMedicoId(medicoid);
+        }
+
+        //verificar se o id do medico nao foi informado ou se há consultas com o medico
+        if (medicoid == null || medicoid == 0 || consultasDoMedico.isEmpty()) {
+            List<Medico> medicosDisponiveis = getMedicosDisponiveis(consultaRequest.getDatahora());
+            if (medicosDisponiveis.isEmpty()) {
+                throw new NemUmMedicoDisponivelError();
+            }
+            // randomizar o medico
+            medicoIsActive = medicosDisponiveis.get(new Random().nextInt(medicosDisponiveis.size()));
+        } else {
+            //selecionar medico se nao ha consultas com ele
+            medicoIsActive = medicoRepository.findById(medicoid);
+        }
+
         for (Consulta consulta : consultasDoMedico) {
             LocalDateTime dataHoraConsulta = consulta.getDatahora();
-            LocalDateTime dataHoraTerminoConsulta = dataHoraConsulta.plusHours(1); // Considerando que a consulta tem
-                                                                                   // duração de 1 hora
+            LocalDateTime dataHoraTerminoConsulta = dataHoraConsulta.plusHours(1); // Considerando que a consulta tem duração de 1 hora
             if (consultaRequest.getDatahora().isAfter(dataHoraConsulta)
                     && consultaRequest.getDatahora().isBefore(dataHoraTerminoConsulta)) {
                 throw new NaoPermitirAgendarConsultaMedicoNaMesmaHoraError();
             }
         }
-        if(consultaRequest.getDatahora().getHour() < 7 && consultaRequest.getDatahora().getHour() >19){
+
+        if (consultaRequest.getDatahora().getHour() < 7 || consultaRequest.getDatahora().getHour() > 19) {
             throw new ClinicaForaDoHorarioException();
         }
 
-        if (consultasProximasDoPaciente.size() > 0) {
+        if (!consultasProximasDoPaciente.isEmpty()) {
             throw new NaoPermitirAgendamentosNoMesmoDiaError();
-        }
-
-        if (medicoIsActive.getIsActive() != 1) {
-            throw new MedicoInativoError();
-        }
-        if (pacineteIsActive.getIsActive() != 1) {
-            throw new PacienteInativoError();
         }
 
         if (consultaRequest.getDatahora().isBefore(dataHoraMinima)) {
             throw new NaoPermitirAgendamentoAntecedenciatrintaminutoserror();
         }
-        Integer medicoid = consultaRequest.getMedicoid();
-        boolean medicoIDinformad = false;
-        if(medicoid != null){
-            medicoIDinformad = true;
+
+        if (medicoIsActive == null || medicoIsActive.getIsActive() != 1) {
+            throw new MedicoInativoError();
         }
-        if(medicoIDinformad == false){
-            List<Medico> medicosDisponivel = getMedicosDisponiveis(consultaRequest.getDatahora());
-            if(medicosDisponivel.size() == 0){
-                throw new NemUmMedicoDisponivelError();
-            }
-            else{
-                Medico medicodisponivelAgora = medicosDisponivel.get(0);
-                consultaRequest.setMedicoid(medicodisponivelAgora.getMedicoid());
-            }
+
+        if (pacienteIsActive == null || pacienteIsActive.getIsActive() != 1) {
+            throw new PacienteInativoError();
         }
+
+        // setar o medico
+        consultaRequest.setMedicoid(medicoIsActive.getMedicoid());
+
         try {
             return consultaRepository.inserirConsulta(consultaRequest);
         } catch (SQLException ex) {
@@ -91,6 +101,7 @@ public class ConsultaService {
             throw ex;
         }
     }
+
 
     public void delete(Consulta consulta) throws Exception {
         ConsultaRepository consultaRepository = new ConsultaRepository();
