@@ -7,12 +7,14 @@ import java.util.List;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.errors.ClinicaForaDoHorarioException;
+import br.unipar.sistemasaude.ws.errors.ConsultaNaoPodeSerCanceladaError;
 import br.unipar.sistemasaude.ws.errors.MedicoInativoError;
 import br.unipar.sistemasaude.ws.errors.NaoPermitirAgendamentoAntecedenciatrintaminutoserror;
 import br.unipar.sistemasaude.ws.errors.NaoPermitirAgendamentosNoMesmoDiaError;
 import br.unipar.sistemasaude.ws.errors.NaoPermitirAgendarConsultaMedicoNaMesmaHoraError;
 import br.unipar.sistemasaude.ws.errors.NemUmMedicoDisponivelError;
 import br.unipar.sistemasaude.ws.errors.PacienteInativoError;
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.models.Paciente;
@@ -87,7 +89,21 @@ public class ConsultaService {
 
     public void delete(Consulta consulta) throws Exception {
         ConsultaRepository consultaRepository = new ConsultaRepository();
+        LocalDateTime localAgora = LocalDateTime.now();
+    LocalDateTime dataLimiteCancelamento = localAgora.plusHours(24);
+        if(consulta.getMotivoCancelamento() == null){
+            throw new validacaoError("Informe o motivo do cancelamento é obrigatorio");
+        }
+        if (consulta.getDatahora().isBefore(dataLimiteCancelamento)) {
+            throw new ConsultaNaoPodeSerCanceladaError();
+        }
+        try{
         consultaRepository.deletarConsulta(consulta);
+        }
+        catch(SQLException ex){
+            System.err.println("Erro SQL ao inserir consulta: " + ex.getMessage());
+            throw ex;
+        }
     }
 
     public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) {
