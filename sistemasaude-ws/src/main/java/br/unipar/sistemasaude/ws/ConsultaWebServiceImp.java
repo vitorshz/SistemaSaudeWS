@@ -1,12 +1,10 @@
 package br.unipar.sistemasaude.ws;
 
-import java.time.LocalDateTime;
 
+import java.util.ArrayList;
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.interfaces.ConsultaInterface;
 import br.unipar.sistemasaude.ws.models.Consulta;
-import br.unipar.sistemasaude.ws.models.Medico;
-import br.unipar.sistemasaude.ws.models.Paciente;
 import br.unipar.sistemasaude.ws.service.ConsultaService;
 import jakarta.jws.WebService;
 
@@ -25,15 +23,15 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
          consultaService.delete(consulta);
     }
     @Override
-    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora){
+    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId){
     ConsultaService consultaService = new ConsultaService();
-    return consultaService.findConsultaByMedicoId(medico,datahora);
+    return consultaService.findConsultaByMedicoId(medicoId);
     }
 
     @Override
-    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora){
+    public ArrayList<Consulta> findConsultaByPacienteId(int pacienteId){
         ConsultaService consultaService = new ConsultaService();
-        return consultaService.findCOnsultaByPacienteId(paciente, datahora);
+        return consultaService.findConsultaByPacienteId(pacienteId);
     }
     
 }
