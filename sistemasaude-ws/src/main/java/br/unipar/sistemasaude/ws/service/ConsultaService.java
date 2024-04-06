@@ -36,6 +36,7 @@ public class ConsultaService {
         Paciente pacineteIsActive = pacienteRepository.findById(consultaRequest.getPacienteid());
         Medico medicoIsActive = medicoRepository.findById(consultaRequest.getMedicoid());
         ConsultaFiltrada consultaFiltrada = new ConsultaFiltrada();
+
         ArrayList<Consulta> consultasDoPaciente = consultaRepository
                 .findConsultaByPacienteId(consultaRequest.getPacienteid());
         List<Consulta> consultasProximasDoPaciente = consultaFiltrada.filtrarConsultasProximas(consultasDoPaciente);
@@ -69,7 +70,11 @@ public class ConsultaService {
             throw new NaoPermitirAgendamentoAntecedenciatrintaminutoserror();
         }
         Integer medicoid = consultaRequest.getMedicoid();
+        boolean medicoIDinformad = false;
         if(medicoid != null){
+            medicoIDinformad = true;
+        }
+        if(medicoIDinformad == false){
             List<Medico> medicosDisponivel = getMedicosDisponiveis(consultaRequest.getDatahora());
             if(medicosDisponivel.size() == 0){
                 throw new NemUmMedicoDisponivelError();

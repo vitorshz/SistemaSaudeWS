@@ -42,7 +42,7 @@ public class ConsultaRepository {
             ps.setInt(1, ramdom.nextInt());
             ps.setInt(2, consultaRequest.getPacienteid());
             ps.setInt(3, consultaRequest.getMedicoid());
-            ps.setTimestamp(3, Timestamp.valueOf(consultaRequest.getDatahora().toString()));
+            ps.setTimestamp(3, Timestamp.valueOf(consultaRequest.getDatahora()));
             ps.setInt(4,1);
             ResultSet rs = (ResultSet) ps.executeQuery();
             
