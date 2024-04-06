@@ -3,12 +3,9 @@ package br.unipar.sistemasaude.ws.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.unipar.sistemasaude.ws.dto.MedicoRequest;
-import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.repository.MedicoRepository;
-import br.unipar.sistemasaude.ws.repository.PacienteRepository;
 
 public class medicoService {
      public ArrayList<Medico> listAll() throws SQLException {

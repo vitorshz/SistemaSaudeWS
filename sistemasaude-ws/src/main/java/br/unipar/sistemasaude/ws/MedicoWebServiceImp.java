@@ -3,8 +3,6 @@ package br.unipar.sistemasaude.ws;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.unipar.sistemasaude.ws.dto.MedicoRequest;
-import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.interfaces.MedicoInterface;
 import br.unipar.sistemasaude.ws.models.Medico;

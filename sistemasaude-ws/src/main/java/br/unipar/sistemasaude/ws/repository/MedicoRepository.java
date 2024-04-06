@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.unipar.sistemasaude.ws.dto.MedicoRequest;
-import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Endereco;
