@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ConsultaRepository {
 
@@ -163,7 +162,12 @@ public class ConsultaRepository {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 LocalDateTime dataHora = rs.getTimestamp("datahora").toLocalDateTime();
-                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.valueOf(rs.getString("motivoCancelamento"));
+                String motivocancelamentors = rs.getString("motivoCancelamento");
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.ESTAATIVO;
+                if(motivocancelamentors != null){
+                      motivoCancelamento = MotivoCancelamentosEnum.valueOf(motivocancelamentors);
+                }
+               
                 int isActive = rs.getInt("isActive");
                 int duracaoEmMinutos = rs.getInt("duracaoemminutos");
 

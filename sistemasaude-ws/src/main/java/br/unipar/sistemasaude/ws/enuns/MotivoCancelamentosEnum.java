@@ -1,21 +1,32 @@
 package br.unipar.sistemasaude.ws.enuns;
 
 public enum MotivoCancelamentosEnum {
-    PACIENTE_DESISTIU,
-    MEDICO_CANCELADO,
-    OUTROS;
+    PACIENTE_DESISTIU("D"),
+    MEDICO_CANCELADO("C"),
+    OUTROS("O"),
+    ESTAATIVO("A");
+    String codigo;
+    private MotivoCancelamentosEnum(String codigo) {
+        this.codigo = codigo;
+    }
 
-    // Exemplo de uso para obter uma descrição do motivo
-    public String getDescricao() {
-        switch (this) {
-            case PACIENTE_DESISTIU:
-                return "Paciente desistiu";
-            case MEDICO_CANCELADO:
-                return "Médico cancelou";
-            case OUTROS:
-                return "Outros motivos";
-            default:
-                throw new IllegalArgumentException("Motivo de cancelamento não reconhecido");
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public static MotivoCancelamentosEnum getEnumByCodigo(String codigo) {
+        MotivoCancelamentosEnum retorno = null;
+
+        for (MotivoCancelamentosEnum especialidade : MotivoCancelamentosEnum.values()) {
+            if (especialidade.getCodigo().equalsIgnoreCase(codigo)) {
+                retorno = especialidade;
+            }
         }
+
+        return retorno;
     }
 }
