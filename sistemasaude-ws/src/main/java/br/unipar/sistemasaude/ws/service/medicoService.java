@@ -21,13 +21,13 @@ public class medicoService {
         return medicoRepository.findById(id);
     }
     
-    public MedicoRequest insert(MedicoRequest medicoDto) throws SQLException, EspecialidadeException {
+    public Medico insert(Medico medicoDto) throws SQLException, EspecialidadeException {
         MedicoRepository medicoRepository = new MedicoRepository();
         return medicoRepository.insert(medicoDto);
     }
-    public MedicoUpdateRequestDTO atualizar(MedicoUpdateRequestDTO updateDTO) throws Exception {
+    public void atualizar(Medico updateDTO) throws Exception {
         MedicoRepository medicoRepository = new MedicoRepository();
-        return medicoRepository.update(updateDTO);
+        medicoRepository.update(updateDTO);
     }
 
     public void delete(int id) throws SQLException {

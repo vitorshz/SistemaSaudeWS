@@ -1,0 +1,46 @@
+CREATE TABLE endereco (
+    id SERIAL PRIMARY KEY,
+    numero VARCHAR,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    uf VARCHAR(20) NOT NULL,
+    cep VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE pessoa (
+    id SERIAL PRIMARY KEY NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    telefone VARCHAR(20) NOT NULL,
+    enderecoid INT NOT NULL,
+	isactive INT DEFAUlT 1,
+    FOREIGN KEY (enderecoid) REFERENCES endereco(id)
+);
+
+CREATE TABLE paciente (
+    id SERIAL PRIMARY KEY NOT NULL,
+    pessoaid INT NOT NULL,
+    cpf VARCHAR(11),
+    FOREIGN KEY (pessoaid) REFERENCES pessoa(id)
+);
+
+CREATE TABLE medico(
+    id SERIAL PRIMARY KEY NOT NULL,
+    pessoaid INT NOT NULL,
+    crm VARCHAR(20) NOT NULL,
+    especialidade VARCHAR(100) NOT NULL,
+    FOREIGN KEY (pessoaid) REFERENCES pessoa(id)
+);
+
+CREATE TABLE Consulta (
+    id SERIAL PRIMARY KEY,
+    pacienteid INT NOT NULL,
+    medicoid INT NOT NULL,
+    duracaoemminutos INT DEFAULT 60,
+    datahora TIMESTAMP NOT NULL,
+    motivoCancelamento VARCHAR(50),
+    isActive INT DEFAULT 1,
+    FOREIGN KEY (pacienteid) REFERENCES Paciente(id),
+    FOREIGN KEY (medicoid) REFERENCES Medico(id)
+);
