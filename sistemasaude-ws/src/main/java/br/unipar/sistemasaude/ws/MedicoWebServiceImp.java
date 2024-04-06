@@ -31,8 +31,9 @@ public class MedicoWebServiceImp implements MedicoInterface{
     }
 
     @Override
-    public void deletarMedico(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void deletarMedico(int id) throws SQLException{
+        medicoService medicoService = new medicoService();
+      medicoService.delete(id);
     }
 
     @Override

@@ -29,6 +29,6 @@ public interface MedicoInterface {
     void atualizarMedico(Medico medico) throws SQLException, Exception;
     
     @WebMethod
-    void deletarMedico(int id);
+    void deletarMedico(int id)throws SQLException;
 
 }
