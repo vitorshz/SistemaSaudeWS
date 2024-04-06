@@ -3,9 +3,8 @@ package br.unipar.sistemasaude.ws;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.unipar.sistemasaude.ws.dto.MedicoRequest;
-import br.unipar.sistemasaude.ws.dto.MedicoUpdateRequestDTO;
 import br.unipar.sistemasaude.ws.errors.EspecialidadeException;
+import br.unipar.sistemasaude.ws.errors.validacaoError;
 import br.unipar.sistemasaude.ws.interfaces.MedicoInterface;
 import br.unipar.sistemasaude.ws.models.Medico;
 import br.unipar.sistemasaude.ws.service.medicoService;
@@ -19,7 +18,7 @@ public class MedicoWebServiceImp implements MedicoInterface{
     
 
     @Override
-    public Medico inserirMedico(Medico medicoDto) throws SQLException, ValidationException, EspecialidadeException {
+    public Medico inserirMedico(Medico medicoDto) throws SQLException, ValidationException, EspecialidadeException,validacaoError {
         medicoService medicoService = new medicoService();
         return medicoService.insert(medicoDto);
     }
@@ -48,7 +47,8 @@ public class MedicoWebServiceImp implements MedicoInterface{
         Medico medico = medicoService.findById(id);
         return medico;
     }
-
+    
+    
     
     
 }
