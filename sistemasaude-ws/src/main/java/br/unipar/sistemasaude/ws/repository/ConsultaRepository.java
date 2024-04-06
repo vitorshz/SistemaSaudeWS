@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Consulta;
-import br.unipar.sistemasaude.ws.models.Medico;
-import br.unipar.sistemasaude.ws.models.Paciente;
 import jakarta.resource.cci.ResultSet;
 
 import java.sql.Timestamp;
@@ -14,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ConsultaRepository {
@@ -120,12 +119,16 @@ public class ConsultaRepository {
         }
     }
 
-    public Consulta findConsultaByMedicoId(Medico medico, LocalDateTime datahora) {
+    public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) {
 
         throw new UnsupportedOperationException("Unimplemented method 'findConsultaByMedicoId'");
     }
 
-    public Consulta findCOnsultaByPacienteId(Paciente paciente, LocalDateTime datahora) {
+    public ArrayList<Consulta> findConsultaByPacienteId(int pacienteId) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
+    }
+    public ArrayList<Consulta> findConsultaByDataHora(LocalDateTime datahora) {
 
         throw new UnsupportedOperationException("Unimplemented method 'findCOnsultaByPacienteId'");
     }

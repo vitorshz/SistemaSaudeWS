@@ -34,7 +34,6 @@ public class PacienteService {
         Paciente pacienteExistente = findById(paciente.getPacienteid());
         paciente.setEmail(pacienteExistente.getEmail());
         paciente.setCpf(pacienteExistente.getCpf());
-
         PacienteRepository pacienteRepository = new PacienteRepository();
         pacienteRepository.update(paciente);
     }
