@@ -1,10 +1,8 @@
 # bosin sistema saude ws
+### Nomes e RA: Vitor Hugo Toshiyuki Shimizu 240397-1, Eduardo Issao Nakai Frasson 239648-1
 
-# requisitos de funcionaidade
 
-# bosin sistema saude ws
-
-# requisitos de funcionaidade
+## requisitos de funcionaidade
 
 - [x]  Deve ser possivel cadastrar um medico;
 - [x]  deve ser possivel listar os medicos cadastrados;
@@ -14,10 +12,10 @@
 - [x]  deve ser possivel listar os pacientes cadastrados;
 - [x]  deve ser possivel atualizar um paciente;
 - [x]  deve ser possivel desativar um paciente do sistema;
-- [ ]  deve ser possivel agendar uma consulta;
-- [ ]  deve ser possivel cancelar uma consulta;
+- [x]  deve ser possivel agendar uma consulta;
+- [x]  deve ser possivel cancelar uma consulta;
 
-# regras de negocio
+## regras de negocio
 
 - [x]  a listagem de médicos devem ser ordenada por ordem crescente pelo nome do medico;
 - [x]  não é permitido alterar o e-mail, crm e a especialidade do medico;
