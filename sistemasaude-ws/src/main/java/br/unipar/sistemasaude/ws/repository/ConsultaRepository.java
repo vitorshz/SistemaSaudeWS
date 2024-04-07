@@ -68,7 +68,7 @@ public class ConsultaRepository {
     public void deletarConsulta(int consultaId, MotivoCancelamentosEnum motivo) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
-        String updateQuery = "UPDATE consulta SET isActive = 0, motivocancelamento = ? WHERE consultaid = ?";
+        String updateQuery = "UPDATE consulta SET isActive = 0, motivocancelamento = ? WHERE id = ?";
         try {
             conn = new ConnectionFactory().getConnection();
             ps = conn.prepareStatement(updateQuery);
@@ -132,7 +132,7 @@ public class ConsultaRepository {
                 int id = rs.getInt("id");
                 LocalDateTime dataHora = rs.getTimestamp("datahora").toLocalDateTime();
                 String motivocancelamentors = rs.getString("motivoCancelamento");
-                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.ESTAATIVO;
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.A;
                 if(motivocancelamentors != null){
                       motivoCancelamento = MotivoCancelamentosEnum.valueOf(motivocancelamentors);
                 }
@@ -166,7 +166,7 @@ public class ConsultaRepository {
                 int id = rs.getInt("id");
                 int pacienteId = rs.getInt("pacienteid");
                 int medicoId = rs.getInt("medicoid");
-                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.ESTAATIVO;
+                MotivoCancelamentosEnum motivoCancelamento = MotivoCancelamentosEnum.A;
                 int isActive = rs.getInt("isActive");
                 int duracaoEmMinutos = rs.getInt("duracaoemminutos");
 

@@ -46,4 +46,5 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
         return consultaService.findConsultaByPacienteId(pacienteId);
     }
     
+    
 }
