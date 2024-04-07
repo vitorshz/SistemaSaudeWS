@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
 import br.unipar.sistemasaude.ws.enuns.MotivoCancelamentosEnum;
+import br.unipar.sistemasaude.ws.errors.DontExistsConsultaError;
 import br.unipar.sistemasaude.ws.infraestructure.ConnectionFactory;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 
 public class ConsultaRepository {
@@ -64,58 +65,26 @@ public class ConsultaRepository {
         return consultacreated;
     }
 
-    public void deletarConsulta(Consulta consulta) throws Exception {
-
+    public void deletarConsulta(int consultaId, MotivoCancelamentosEnum motivo) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
-        String queryByDateTimeConsulta = "SELECT datahora FROM consulta WHERE datahora > ?;";
+        String updateQuery = "UPDATE consulta SET isActive = 0, motivocancelamento = ? WHERE consultaid = ?";
         try {
             conn = new ConnectionFactory().getConnection();
-
-            LocalDateTime now = LocalDateTime.now();
-            ps = conn.prepareStatement(queryByDateTimeConsulta);
-            ps.setString(1, null);
-            ResultSet rs = (ResultSet) ps.executeQuery();
-            Consulta consultaQuery = new Consulta();
-            while (rs.next()) {
-                consultaQuery.setId(rs.getInt("id"));
-                consultaQuery.setMedicoid(rs.getInt("medicoid"));
-                consultaQuery.setPacienteid(rs.getInt("pacienteid"));
-                Timestamp timestamp = rs.getTimestamp("datahora");
-                if (timestamp != null) {
-                    LocalDateTime localDateTime = timestamp.toLocalDateTime();
-                    consultaQuery.setDatahora(localDateTime);
-                } else {
-                    throw new Exception("Internal server error");
-                }
-                consultaQuery.setIsActive(rs.getInt("isactive"));
-                consultaQuery.setMotivoCancelamento(rs.getString("motivocancelamento"));
+            ps = conn.prepareStatement(updateQuery);
+            ps.setString(1, motivo.getCodigo());
+            ps.setInt(2, consultaId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new DontExistsConsultaError();
             }
-
-            // Calcula a diferença em minutos entre a hora atual e a hora da tabela
-            long diffMinutes = ChronoUnit.HOURS.between(consulta.getDatahora(), now);
-            if(consultaQuery.getIsActive() == 0){
-                throw new Exception("Consulta já cancelada");
-            }
-            if (Math.abs(diffMinutes) > 24) {
-                throw new RuntimeException(
-                        "Erro: A diferença entre a hora atual e a hora da tabela é maior que 24 horas");
-            } else {
-
-                String query = "UPDATE consulta SET isActive = 0 motivocancelamento = ? WHERE consultaid = ?";
-                ps = conn.prepareStatement(query);
-                ps.setString(1, consulta.getMotivoCancelamento().toString());
-                ps.setInt(2, consulta.getId());
-
-                ps.executeUpdate();
-            }
-
         } finally {
-
-            if (ps != null)
+            if (ps != null) {
                 ps.close();
-            if (conn != null)
+            }
+            if (conn != null) {
                 conn.close();
+            }
         }
     }
 
@@ -211,6 +180,38 @@ public class ConsultaRepository {
                 conn.close();
         }
         return consultasQuery;
+    }
+    public Consulta findConsultaById(int consultaId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Consulta consulta = null;
+        String querySQL = "SELECT * FROM consulta WHERE id = ? AND isactive = 1;";
+        try {
+            conn = new ConnectionFactory().getConnection();
+            ps = conn.prepareStatement(querySQL);
+            ps.setInt(1, consultaId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int pacienteId = rs.getInt("pacienteid");
+                int medicoId = rs.getInt("medicoid");
+                LocalDateTime dataHora = rs.getTimestamp("datahora").toLocalDateTime();
+                String motivoCancelamentoStr = rs.getString("motivoCancelamento");
+                MotivoCancelamentosEnum motivoCancelamento = null;
+                if (motivoCancelamentoStr != null) {
+                    motivoCancelamento = MotivoCancelamentosEnum.valueOf(motivoCancelamentoStr);
+                }
+                int isActive = rs.getInt("isActive");
+                int duracaoEmMinutos = rs.getInt("duracaoemminutos");
+    
+                consulta = new Consulta(consultaId, pacienteId, medicoId, dataHora, motivoCancelamento, isActive, duracaoEmMinutos);
+            }
+        } finally {
+            if (ps != null)
+                ps.close();
+            if (conn != null)
+                conn.close();
+        }
+        return consulta;
     }
 
 }

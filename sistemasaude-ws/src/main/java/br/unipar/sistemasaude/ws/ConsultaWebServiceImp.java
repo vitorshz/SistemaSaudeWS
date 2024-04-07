@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequest;
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequestDTO;
+import br.unipar.sistemasaude.ws.enuns.MotivoCancelamentosEnum;
 import br.unipar.sistemasaude.ws.interfaces.ConsultaInterface;
 import br.unipar.sistemasaude.ws.models.Consulta;
 import br.unipar.sistemasaude.ws.service.ConsultaService;
@@ -29,9 +30,9 @@ public class ConsultaWebServiceImp implements ConsultaInterface{
     }
 
     @Override
-    public void deletarConsulta(Consulta consulta) throws Exception{
+    public void deletarConsulta(int consultaId, MotivoCancelamentosEnum motivo) throws Exception{
         ConsultaService consultaService = new ConsultaService();
-         consultaService.delete(consulta);
+         consultaService.cancelarConsulta(consultaId,motivo);
     }
     @Override
     public ArrayList<Consulta> findConsultaByMedicoId(int medicoId) throws SQLException{

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.unipar.sistemasaude.ws.dto.InsertConsultaRequest;
-
+import br.unipar.sistemasaude.ws.enuns.MotivoCancelamentosEnum;
 import br.unipar.sistemasaude.ws.errors.ConsultaNaoPodeSerCanceladaError;
 import br.unipar.sistemasaude.ws.errors.DontExistsConsultaError;
 import br.unipar.sistemasaude.ws.errors.DontExistsMedicoError;
@@ -20,7 +20,7 @@ public interface ConsultaInterface {
     @WebMethod
     Consulta inserirConsulta(InsertConsultaRequest consultaRequest) throws SQLException,validacaoError, Exception;
     @WebMethod
-    void deletarConsulta(Consulta consulta) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError, Exception;
+    void deletarConsulta(int consultaId, MotivoCancelamentosEnum motivo) throws SQLException,DontExistsConsultaError,ConsultaNaoPodeSerCanceladaError, Exception;
     @WebMethod
     ArrayList<Consulta> findConsultaByMedicoId(int medicoId) throws SQLException,ValidationException,DontExistsMedicoError;
     @WebMethod
